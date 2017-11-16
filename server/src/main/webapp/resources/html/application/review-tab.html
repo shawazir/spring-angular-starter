@@ -1,0 +1,579 @@
+<form name="form" novalidate>
+	<div class="wizard review-tab col-xs-12 clear-col-padding">
+		<div class="wizard-header col-xs-12 clear-col-padding">
+			<ul>
+				<li ng-class="{'active': nav.currentTabNumber === 100, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 100) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 100}" style="width: 12.5%;">
+					<a href="#/application/1">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 100) != cache.enums.ApplicantWizardTabStatus.COMPLETE">1</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 100) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات عامة
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 300, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 300) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 300}" style="width: 12.5%;">
+					<a href="#/application/2">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 300) != cache.enums.ApplicantWizardTabStatus.COMPLETE">2</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 300) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات العنوان
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 200, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 200) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 200}" style="width: 12.5%;">
+					<a href="#/application/3">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 200) != cache.enums.ApplicantWizardTabStatus.COMPLETE">3</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 200) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات التابعين
+					</a>
+				</li>
+				   	<li ng-class="{'active': nav.currentTabNumber === 600, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 600) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 600}" style="width: 12.5%;">
+					<a href="#/application/4">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 600) != cache.enums.ApplicantWizardTabStatus.COMPLETE">4</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 600) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						الإفصاح عن الدخل 
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 400, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 400) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 400}" style="width: 12.5%;">
+					<a href="#/application/5">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 400) != cache.enums.ApplicantWizardTabStatus.COMPLETE">5</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 400) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات العقارات
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 500, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 500) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 500}" style="width: 12.5%;">
+					<a href="#/application/6">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 500) != cache.enums.ApplicantWizardTabStatus.COMPLETE">6</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 500) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات الحساب البنكي
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 700, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 700) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 700}" style="width: 12.5%;">
+					<a href="#/application/7">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 700) != cache.enums.ApplicantWizardTabStatus.COMPLETE">7</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 700) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						إدارة المرفقات 
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 1000000, 'completed': loggedInUser.profileStatus == cache.enums.ProfileStatus.COMPLETE && nav.currentTabNumber != 1000000}" style="width: 12.5%;">
+					<a href="#/application/8">
+						<span ng-if="loggedInUser.profileStatus != cache.enums.ProfileStatus.COMPLETE">8</span>
+						<span ng-if="loggedInUser.profileStatus == cache.enums.ProfileStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						مراجعة
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="wizard-body col-xs-12">
+			<div class="tab-section col-xs-12 clear-col-padding">
+				<div class="tab-section-header">بيانات عامة</div>
+				<div class="tab-section-body col-xs-12">
+					<div class="section-header col-xs-12 clear-col-padding">بيانات
+						عامة</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">الحالة الاجتماعية</div>
+							<div class="col-xs-12 col-sm-8">{{data.group2.Social_Status
+								| dynLookup14}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">الحالة الصحية</div>
+							<div class="col-xs-12 col-sm-8">{{data.group2.Health_Status
+								| dynLookup27}}</div>
+						</div>
+					</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">حالة القدرة على العمل</div>
+							<div class="col-xs-12 col-sm-8">{{data.group2.Work_Ability_Status
+								| dynLookup28}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">المستوى التعليمي</div>
+							<div class="col-xs-12 col-sm-8">{{data.group2.Education_Status
+								| dynLookup15}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-section col-xs-12 clear-col-padding">
+				<div class="tab-section-header">بيانات العنوان</div>
+				<div class="tab-section-body col-xs-12">
+					<div class="section-header col-xs-12 clear-col-padding">السكن</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">حالة السكن</div>
+							<div class="col-xs-12 col-sm-8">{{data.group5.House_Status
+								| dynLookup25}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">نوع السكن</div>
+							<div class="col-xs-12 col-sm-8">{{data.group5.House_Type |
+								dynLookup24}}</div>
+						</div>
+					</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">المنطقة</div>
+							<div class="col-xs-12 col-sm-8">{{data.group5.Address_Region
+								| dynLookup19}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">المدينة</div>
+							<div class="col-xs-12 col-sm-8">{{data.group5.Address_City
+								| dynOnDemandLookup : 20}}</div>
+						</div>
+					</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">الحي</div>
+							<div class="col-xs-12 col-sm-8">{{data.group5.Address_District
+								| dynOnDemandLookup : 21}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">الشارع</div>
+							<div class="col-xs-12 col-sm-8">{{data.group5.Address_Street}}</div>
+						</div>
+					</div>
+					<div class="section-header col-xs-12 clear-col-padding">العنوان</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">حالة العنوان البريدي</div>
+							<div class="col-xs-12 col-sm-8">{{data.group6.Address_Type
+								| dynLookup26}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">رقم المنزل</div>
+							<div class="col-xs-12 col-sm-8">{{data.group6.Address_House_Number}}</div>
+						</div>
+					</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">رقم الوحدة</div>
+							<div class="col-xs-12 col-sm-8">{{data.group6.Address_Unit_Number}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">الرقم الإضافي</div>
+							<div class="col-xs-12 col-sm-8">{{data.group6.Address_Additional_Number}}</div>
+						</div>
+					</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">الرمز البريدي</div>
+							<div class="col-xs-12 col-sm-8">{{data.group6.Address_Zip_Code}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">صندوق البريد</div>
+							<div class="col-xs-12 col-sm-8">{{data.group6.Address_PO_Box}}</div>
+						</div>
+					</div>
+					<div class="section-header col-xs-12 clear-col-padding">معلومات
+						التواصل</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">رقم الجوال</div>
+							<div class="col-xs-12 col-sm-8">
+								{{loggedInUser.mobileNumber}}
+							</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">رقم الجوال الإضافي</div>
+							<div class="col-xs-12 col-sm-8">{{data.group7.Additional_Mobile_Number}}</div>
+						</div>
+					</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">رقم الهاتف</div>
+							<div class="col-xs-12 col-sm-8">{{data.group7.Land_Line}}</div>
+						</div>
+					</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">البريد الالكتروني</div>
+							<div class="col-xs-12 col-sm-8">{{data.group7.Email}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">تأكيد البريد الالكتروني</div>
+							<div class="col-xs-12 col-sm-8">{{data.group7.Email_Confirmation}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-section col-xs-12 clear-col-padding">
+				<div class="tab-section-header">بيانات التابعين</div>
+				<div class="tab-section-body col-xs-12">
+					<div class="section-header col-xs-12 clear-col-padding">التابعين</div>
+					<div class="col-xs-12 grid-group-item"
+						ng-repeat="item in tab3Data.group4.items">
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">الهوية الوطنية/ الإقامة</div>
+								<div class="col-xs-12 col-sm-8">{{item.Ui_Dependent_Nin}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6"
+								ng-if="item.Dependent_Nin.charAt(0) != 2">
+								<div class="col-xs-12 col-sm-4">تاريخ الميلاد</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_Date_Of_Birth_H
+									| dateObject}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6"
+								ng-if="item.Dependent_Nin.charAt(0) == 2">
+								<div class="col-xs-12 col-sm-4">تاريخ الميلاد</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_Date_Of_Birth_G
+									| dateObject}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">الاسم الأول</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_First_Name}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">اسم الأب</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_Father_Name}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">اسم الجد</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_Grandfather_Name}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">اسم العائلة</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_Family_Name}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">صلة القرابة</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_Relationship | dynLookup13}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">الحالة الوظيفية</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_Employment_Status | dynLookup16}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-input col-xs-12 grid-group-item clear-col-padding"
+						style="text-align: center"
+						ng-show="data.group4.items.length === 0">
+						<div class="form-input">
+						لايوجد
+						</div>
+						</div>
+					
+<!-- 					<div class="section-header col-xs-12 clear-col-padding">دخل -->
+<!-- 						المستفيد</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">الحالة الوظيفية للمستفيد</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8">{{data.group3.Employment_Status -->
+<!-- 								| dynLookup16}}</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">دخل المستفيد</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8">{{data.group3.Income}}</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">إجمالي الدخل الإضافي -->
+<!-- 								للمستفيد</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8">{{data.group3.Additional_Income}}</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+					
+<!-- 					<div class="section-header col-xs-12 clear-col-padding">مرفقات -->
+<!-- 						التابعين</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6" -->
+<!-- 							ng-if="loggedInUser.gender === 'FEMALE'"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">نوع المرفق</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8">{{data.group9.Dependent_Type -->
+<!-- 								| dynLookup23}}</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6" -->
+<!-- 							ng-if="loggedInUser.gender === 'FEMALE'"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">المستند المرفق</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8"></div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"></div> -->
+				</div>
+			</div>
+			
+			
+			<div class="tab-section col-xs-12 clear-col-padding">
+				<div class="tab-section-header">بيانات الدخل</div>
+				<div class="tab-section-body col-xs-12">
+				<div class="section-header col-xs-12 clear-col-padding">المستفيد</div>
+					
+					<div class="col-xs-12 grid-group-item"
+						ng-repeat="item in tab4Data.group3.items">
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">الحالة الوظيفية</div>
+								<div class="col-xs-12 col-sm-8">{{data.group13.Employment_Status | dynLookup16}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">نوع الدخل</div>
+								<div class="col-xs-12 col-sm-8">{{item.Income_Type | incomeType}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">مصدر الدخل</div>
+								<div class="col-xs-12 col-sm-8">{{item.Income_Source | incomeSource}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">المبلغ الشهري مع البدلات</div>
+								<div class="col-xs-12 col-sm-8">{{item.Monthly_Income}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">الدخل السنوي</div>
+								<div class="col-xs-12 col-sm-8">{{item.Monthly_Income * 12}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-input col-xs-12 grid-group-item clear-col-padding"
+						style="text-align: center"
+						ng-show="data.group3.items.length === 0">
+						<div class="form-input">
+						لايوجد
+						</div>
+						</div>
+					
+					<div class="section-header col-xs-12 clear-col-padding">التابعين</div>
+					<div class="col-xs-12 grid-group-item"
+						ng-repeat="item in tab4Data.group12.items">
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">الهوية الوطنية/ الإقامة</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_NIN}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">اسم التابع</div>
+								<div class="col-xs-12 col-sm-8">{{item.Dependent_NIN | dependentNinToName : tab3Data.group4.items}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">نوع الدخل</div>
+								<div class="col-xs-12 col-sm-8">{{item.Income_Type | incomeType}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">مصدر الدخل</div>
+								<div class="col-xs-12 col-sm-8">{{item.Income_Source | incomeSource}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">المبلغ الشهري مع البدلات</div>
+								<div class="col-xs-12 col-sm-8">{{item.Monthly_Income}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">الدخل السنوي</div>
+								<div class="col-xs-12 col-sm-8">{{item.Monthly_Income * 12}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-input col-xs-12 grid-group-item clear-col-padding"
+						style="text-align: center"
+						ng-show="data.group12.items.length === 0">
+						<div class="form-input">
+						لايوجد
+						</div>
+						</div>
+					
+<!-- 					<div class="section-header col-xs-12 clear-col-padding">دخل -->
+<!-- 						المستفيد</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">الحالة الوظيفية للمستفيد</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8">{{data.group3.Employment_Status -->
+<!-- 								| dynLookup16}}</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">دخل المستفيد</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8">{{data.group3.Income}}</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">إجمالي الدخل الإضافي -->
+<!-- 								للمستفيد</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8">{{data.group3.Additional_Income}}</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+					
+<!-- 					<div class="section-header col-xs-12 clear-col-padding">مرفقات -->
+<!-- 						التابعين</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6" -->
+<!-- 							ng-if="loggedInUser.gender === 'FEMALE'"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">نوع المرفق</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8">{{data.group9.Dependent_Type -->
+<!-- 								| dynLookup23}}</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"> -->
+<!-- 						<div class="form-input col-xs-12 col-sm-6" -->
+<!-- 							ng-if="loggedInUser.gender === 'FEMALE'"> -->
+<!-- 							<div class="col-xs-12 col-sm-4">المستند المرفق</div> -->
+<!-- 							<div class="col-xs-12 col-sm-8"></div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-xs-12 clear-col-padding"></div> -->
+				</div>
+			</div>
+			
+			
+			<div class="tab-section col-xs-12 clear-col-padding">
+				<div class="tab-section-header">بيانات العقارات</div>
+				<div class="tab-section-body col-xs-12">
+					<div class="section-header col-xs-12 clear-col-padding">العقارات</div>
+					<div class="col-xs-12 grid-group-item"
+						ng-repeat="item in data.group8.items">
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-5">رقم الصك</div>
+								<div class="col-xs-12 col-sm-7">{{item.Deed_Number}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-5">المنطقة</div>
+								<div class="col-xs-12 col-sm-7">{{item.Deed_Region |
+									dynLookup19}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-5">المدينة</div>
+								<div class="col-xs-12 col-sm-7">{{item.Deed_City |
+									dynOnDemandLookup : 20}}</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-5">إجمالي نسبة التمليك</div>
+								<div class="col-xs-12 col-sm-7">{{item.Deed_Owned_Percentage}}</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-5">إجمالي المساحة المملوكة</div>
+								<div class="col-xs-12 col-sm-7">{{item.Owning_Area}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-input col-xs-12 grid-group-item clear-col-padding"
+						style="text-align: center"
+						ng-show="data.group8.items.length === 0">
+						<div class="form-input">
+						لايوجد
+						</div></div>
+				</div>
+			</div>
+			<div class="tab-section col-xs-12 clear-col-padding">
+				<div class="tab-section-header">بيانات الحساب البنكي</div>
+				<div class="tab-section-body col-xs-12">
+					<div class="section-header col-xs-12 clear-col-padding">الحساب
+						البنكي</div>
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">رقم الحساب البنكي</div>
+							<div class="col-xs-12 col-sm-8">{{data.group1.IBAN}}</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">تأكيد رقم الحساب البنكي</div>
+							<div class="col-xs-12 col-sm-8">{{data.group1.IBAN_Confirmation}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="tab-section col-xs-12 clear-col-padding">
+				<div class="tab-section-header">مرفقات التابعين</div>
+				<div class="tab-section-body col-xs-12">
+					<div class="section-header col-xs-12 clear-col-padding">مرفقات التابعين</div>
+					<div ng-if="uploadedFiles.length > 0" class="col-xs-12 clear-col-padding">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="col-xs-1">نوع المرفق</th>
+								<th class="col-xs-4">اسم الملف</th>
+								<th class="col-xs-1">حالة المستند</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="file in uploadedFiles">
+								<td>{{file.category | documentType}}</td>
+								<td><strong>{{file.fileName}}</strong></td>
+								<td>{{file.status | documentStatus}}</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+				<div class="form-input col-xs-12 grid-group-item clear-col-padding"
+						style="text-align: center"
+						ng-show="uploadedFiles.length === 0 || !uploadedFiles">
+						<div class="form-input">
+						لايوجد
+						</div>
+				</div>
+					</div>
+			</div>
+			
+			<div class="section-header col-xs-12 clear-col-padding">إقرار</div>
+			
+			<div class="consent col-xs-12 alert alert-info">
+				يعد تقديمك لبرنامج حساب المواطن قبولٌ منك للأحكام الواردة أدناه، الرجاء قراءتها بعناية في حال موافقتك على ما جاء فيها.<br />
+				أقر وأتعهد أنا المتقدم (عن نفسي وعن التابعين لي) بما يلي:
+				<ol>
+					<li>جميع البيانات والمستندات والوثائق التي أفصحت عنها أو قمت بإرسالها صحيحة وكاملة وحديثة وتعكس الواقع حتى تاريخه.</li>
+					<li>التزامي بعدم إخفاء أي معلومة تطلب وزارة العمل والتنمية الاجتماعية الإفصاح عنها، وأتحمل كافة المسؤولية القانونية وآثارها في حالة ثبوت العكس.</li>
+					<li>التزامي بتحديث بياناتي لدى البرنامج كل ما طرأ تحديث أو تغيير على حالتي الاجتماعية أو الاقتصادية أو الصحية سواء لي أو لأحد التابعين لي.</li>
+					<li>يحق لوزارة العمل والتنمية الاجتماعية تأجيل أو استبعاد طلبي أو استرداد ما صرف لي دون وجه حق، واتخاذ كافة الإجراءات النظامية، وذلك في حال قيامي بتقديم بيانات أو معلومات غير صحيحة، أو إخفاءها أو عدم الإفصاح عنها، أو عدم قيامي بتحديثها.</li>
+					<li>إذا ثبت قيامي بتزويد وزارة العمل والتنمية الاجتماعية بمعلومات أو مستندات أو وثائق غير صحيحة فيحق للجهات المختصة اتخاذ كافة الإجراءات وتطبيق العقوبات النظامية بحقي المنصوص عليها في الأنظمة ومنها النظام الجزائي لجرائم التزوير الصادر بالمرسوم الملكي رقم (م/11) وتاريخ 18/2/1435هـ من عقوبة تصل إلى السجن مدة خمس سنوات وغرامة مالية بمقدار 500.000 (خمسمئة ألف) ريال.</li>
+					<li>يحق لوزارة العمل والتنمية الاجتماعية الاطلاع على حساباتي البنكية والاستثمارية أو حسابات المؤسسات والشركات ومثيلاتها التي امتلكها أو امتلك جزء منها للتحقق منها، كما يحق لها طلب معلوماتي الائتمانية لدى شركات المعلومات الائتمانية , وأي معلومات مالية أو استثمارية، ومعلومات أية دخول مستحقة لي سواء من العمل لدى القطاع الحكومي أو القطاع الخاص أو القطاع غير الربحي أو غيرها.</li>
+					<li>يحق لوزارة العمل والتنمية الاجتماعية الإفصاح عن أي معلومات تنص الأنظمة على جواز الإفصاح عنها.</li>
+					<li>يحق لوزارة العمل والتنمية الاجتماعية استخدام المعلومات والبيانات وأي مستندات أو وثائق تم تقديمها لاستخدامها في إحصائيات دون أن تؤدي للكشف عن هويتي أو أي من معلوماتي الشخصية.</li>
+					<li>لا يعني تقديمي لبرنامج حساب المواطن بأي حال من الأحوال استحقاقي للبدل النقدي، وتقوم الوزارة بدراسة طلبي واتخاذ ما تراه مناسباً وفق آليات العمل لديها وأوليات الصرف المعمول بها لدى وزارة العمل والتنمية الاجتماعية.</li>
+					<li>أوافق على منح وزارة العمل والتنمية الاجتماعية حق طلب وتحصيل ما يلزمها أو تحتاج إليه من معلومات تخصني أو تخص تعاملاتي المالية المدنية أو التجارية أو العقارية أو غير ذلك من المعلومات وأيا كان نوعها بما يشمل المعلومات لدى الجهات الحكومية وشبه الحكومية ذات العلاقة، كما أوافق على منحها حق تبادل تلك المعلومات مع الجهات الحكومية والخاصة.</li>
+					<li>علمي وإقراري بأنه سيتم دراسة الطلب واتخاذ قرار الاهلية لبرنامج حساب المواطن وفقاً للإجراءات وضوابط البرنامج، ومن ثم الرد بالموافقة أو الرفض حسب الأحقية.</li>
+				</ol>
+				
+				<input type="checkbox" ng-model="agreedToConsent" required="required" /> إقرار  بصحة البيانات وتعهد بالالتزام
+			</div>
+			
+			</div>
+			<div class="alert alert-warning col-xs-12" ng-if="form.$submitted && !agreedToConsent">
+				عذرا، لا يمكنك الاستمرار قبل التأكيد على قراءة الإقرار وذلك بالنقر داخل المربع.
+			</div>
+			
+			<div class="alert alert-danger col-xs-12" ng-if="showInCompleteErrorMessage">
+				{{UnCompleteErrorMessageContent}}
+			</div>
+			
+		</div>
+		<div class="wizard-footer col-xs-12">
+			<div class="col-xs-12 clear-col-padding">
+				<div
+					class="col-xs-12 col-sm-6 text-xs-center text-sm-right clear-col-padding">
+					<a class="btn previous" style="width: 130px;" href="#/start"
+						ng-disabled="saveInProgress">إلغاء الأمر</a>
+				</div>
+				<div
+					class="col-xs-12 col-sm-6 text-xs-center text-sm-left clear-col-padding">
+					<button type="button" class="btn previous" style="width: 130px;"
+						ng-click="nav.previousFunction()" ng-show="nav.showPreviousBtn"
+						ng-disabled="saveInProgress">السابق</button>
+					<button class="btn next" style="width: 160px;"
+						ng-click="form.$submitted = true; form.$valid && completeApplication()"
+						ng-show="nav.showSubmitBtn" 
+						ng-disabled="saveInProgress || loggedInUser.profileStatus==cache.enums.ProfileStatus.COMPLETE || disableSubmitButton"
+									">تقديم 	الطلب</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

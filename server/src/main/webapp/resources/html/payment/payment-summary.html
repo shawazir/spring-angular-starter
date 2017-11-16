@@ -1,0 +1,58 @@
+<div class="summary-wrapper col-xs-12 ng-scope">
+		<div class="personal-info col-xs-12">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="name col-xs-12 col-sm-12 col-md-12 col-lg-12 ng-binding">{{loggedInUser.name}}</div>
+				</div>
+				<div class="col-xs-12 ">
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6">عدد الدفعات المستلمة</div>
+						<div class="col-xs-12 col-md-6" >{{paymentSummary.numberOfSucessPayments}}</div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6 ">مبلغ الدفعات</div>
+						<div class="col-xs-12 col-md-6  ">{{paymentSummary.totalAmountPaid}}</div>
+					</div>
+				</div>
+				<div class="col-xs-12 ">
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6 ">عدد الدفعات المرفوضة</div>
+						<div class="col-xs-12 col-md-6  ">{{paymentSummary.numberOfRejectedPayment}} </div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6 ">مبلغ الدفعات المرفوضة</div>
+						<div class="col-xs-12 col-md-6  ">{{paymentSummary.totalRejectedAmount}} </div>
+					</div>
+				</div>
+				<div class="col-xs-12 ">
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6 ">عدد الدفعات المعلقة</div>
+						<div class="col-xs-12 col-md-6 " >{{paymentSummary.numberOfPendingPayments}}</div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6 ">مبلغ الدفعات المعلقة</div>
+						<div class="col-xs-12 col-md-6  ">{{paymentSummary.totalPendingAmount}}</div>
+					</div>
+					
+				</div>
+				<div class="col-xs-12 ">
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6 ">عدد الدفعات الاجمالي </div>
+						<div class="col-xs-12 col-md-6 ">{{paymentSummary.numberOfPayments}} </div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6 ">مبلغ الدفعات الاجمالي</div>
+						<div class="col-xs-12 col-md-6  " >{{paymentSummary.totalAmountOfAllPayments}}</div>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 ">
+					<div class="info col-xs-12 col-sm-12 col-md-6 ">
+						<div class="col-xs-12 col-md-6 ">تاريخ اخر دفعه</div>
+						<div class="col-xs-12 col-md-6 " >{{paymentSummary.lasSuccessPaymentDate | dateInt}}</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+</div>

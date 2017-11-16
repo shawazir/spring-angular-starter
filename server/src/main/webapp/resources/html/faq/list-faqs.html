@@ -1,0 +1,23 @@
+<div class="page-header">
+	الأسئلة الشائعة
+</div>
+<div class="categories col-xs-12 col-sm-3" ng-if="categories.length > 0">
+	<ul>
+		<li>
+			<a ng-click="setSelectedCategoryId(null)">جميع الأسئلة</a>
+		</li>
+		<li ng-repeat="category in categories">
+			<a ng-click="setSelectedCategoryId(category.id)">{{category.name}}</a>
+		</li>
+	</ul>
+</div>
+
+<div class="faqs col-xs-12" ng-class="{'col-sm-9': categories.length > 0, 'col-sm-12': categories.length == 0}">
+	<div class="faq" ng-repeat="faq in faqs" ng-if="!selectedCategoryId || faq.categoryId == selectedCategoryId">
+		<div role="button" data-toggle="collapse" data-target="#collapse{{$index}}" aria-expanded="true"
+				aria-controls="collapseExample" ng-bind-html="faq.question"></div>
+		<div id="collapse{{$index}}" class="collapse" ng-bind-html="faq.answer"></div>
+	<div class="no-faqs" ng-hide="faqs.length !== 0">
+		<p>لا توجد اسئلة</p>
+	</div>
+</div>

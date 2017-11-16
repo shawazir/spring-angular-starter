@@ -1,0 +1,13 @@
+﻿<div class="home">
+	<div class="home-background"></div>
+	<div class="introduction">
+		<img src="resources/img/whitelogo.png" alt="" />
+		<div class="navigation-links">
+			<a ng-if="!loggedInUser" class="btn btn-default button1" style="width: 180px" href="#/login">حسابي</a>
+			<a ng-if="loggedInUser" class="btn btn-default button1" style="width: 180px" href="#/logout">تسجيل الخروج</a>
+			<a ng-if="!loggedInUser" class="btn btn-default button2" style="width: 180px" href="#/register">تسجيل جديد</a>
+			<a ng-if="loggedInUser" class="btn btn-default button2" style="width: 180px" href="#/start">الصفحة الرئيسية</a>
+			<a class="btn btn-default button3" style="width: 180px" href="#/about-program">إقرأ المزيد</a>
+		</div>
+	</div>
+</div>

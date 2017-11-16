@@ -1,0 +1,490 @@
+<form name="form" novalidate>
+	<div class="wizard col-xs-12 clear-col-padding">
+		<div class="wizard-header col-xs-12 clear-col-padding">
+			<ul>
+				<li ng-class="{'active': nav.currentTabNumber === 100, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 100) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 100}" style="width: 12.5%;">
+					<a href="#/application/1">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 100) != cache.enums.ApplicantWizardTabStatus.COMPLETE">1</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 100) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات عامة
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 300, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 300) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 300}" style="width: 12.5%;">
+					<a href="#/application/2">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 300) != cache.enums.ApplicantWizardTabStatus.COMPLETE">2</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 300) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات العنوان
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 200, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 200) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 200}" style="width: 12.5%;">
+					<a href="#/application/3">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 200) != cache.enums.ApplicantWizardTabStatus.COMPLETE">3</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 200) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات التابعين
+					</a>
+				</li>
+		    	<li ng-class="{'active': nav.currentTabNumber === 600, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 600) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 600}" style="width: 12.5%;">
+					<a href="#/application/4">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 600) != cache.enums.ApplicantWizardTabStatus.COMPLETE">4</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 600) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						الإفصاح عن الدخل 
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 400, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 400) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 400}" style="width: 12.5%;">
+					<a href="#/application/5">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 400) != cache.enums.ApplicantWizardTabStatus.COMPLETE">5</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 400) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات العقارات
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 500, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 500) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 500}" style="width: 12.5%;">
+					<a href="#/application/6">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 500) != cache.enums.ApplicantWizardTabStatus.COMPLETE">6</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 500) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات الحساب البنكي
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 700, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 700) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 700}" style="width: 12.5%;">
+					<a href="#/application/7">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 700) != cache.enums.ApplicantWizardTabStatus.COMPLETE">7</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 700) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						إدارة المرفقات 
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 1000000, 'completed': loggedInUser.profileStatus == cache.enums.ProfileStatus.COMPLETE && nav.currentTabNumber != 1000000}" style="width: 12.5%;">
+					<a href="#/application/8">
+						<span ng-if="loggedInUser.profileStatus != cache.enums.ProfileStatus.COMPLETE">8</span>
+						<span ng-if="loggedInUser.profileStatus == cache.enums.ProfileStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						مراجعة
+					</a>
+				</li>		
+			</ul>
+		</div>
+		
+		<div id="dependent-modale" class='modal fade' tabindex='-1' role='dialog' hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class='modal-dialog' role='dependent'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h4 class='modal-title'>تأكيد</h4>
+					</div>
+				<div class='modal-body'>
+					<p>هل أن متأكد من عدم وجود تابعين أو معالين، سيتم إزالة التابعين ودخلهم في حال الإجابة بنعم</p>
+				</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-default close-btn' data-dismiss='modal' ng-click="checkQuestion(0)">لا</button>
+					<button type='button' class='btn btn-primary ok-btn' ng-click="checkQuestion(99)">نعم</button>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="dependent-modale-2" class='modal fade' tabindex='-1' role='dialog' hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class='modal-dialog' role='dependent'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h4 class='modal-title'>تأكيد</h4>
+					</div>
+				<div class='modal-body'>
+					<p>هل أن متأكد من عدم وجود تابعين أو معالين، سيتم إزالة التابعين ودخلهم في حال الإجابة بنعم</p>
+				</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-default close-btn' data-dismiss='modal' ng-click="prepareQuestionsArr(null , true); data.group11.HoH_Category = null;">لا</button>
+					<button type='button' class='btn btn-primary ok-btn' ng-click="prepareQuestionsArr(null , false); data.group11.HoH_Category = null;">نعم</button>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="document-confirm-delete-modale" class='modal fade' tabindex='-1' role='dialog' hidden="true">
+			<div class='modal-dialog' role='document'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h4 class='modal-title'>تأكيد</h4>
+					</div>
+				<div class='modal-body'>
+					<p>بإكمال عملية التغيير سيتم حذف جميع المرفقات، علما أنه بعد التغيير قد يتطلب مستندات لإثبات الحالة وإعادة تقديم الطلب من جديد</p>
+				</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-default close-btn' data-dismiss='modal'>لا</button>
+					<button ng-if="confirmAndSave" type='button' class='btn btn-primary ok-btn' ng-click="saveTabData();">نعم</button>
+					<button ng-if="!confirmAndSave" type='button' class='btn btn-primary ok-btn' ng-click="nav.nextFunction();">نعم</button>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="wizard-body col-xs-12">
+			<div class="alert alert-info col-xs-12 clear-col-padding required-fields-message">هذه العلامة  (<span>*</span>) تعني أن الحقل إجباري.</div>
+
+			<ng-form name="group10Form" ng-if="!disableQuestions && ( !(tab1.group2.Social_Status == cache.enums.MaritalStatus.MARRIED && loggedInUser.gender == cache.enums.Gender.MALE) && data.group11.HoH_Category != 51 )" novalidate>
+				<div class="section-header col-xs-12">معلومات العائل</div>
+				
+				<div class="form-input col-xs-12 col-sm-6" ng-if="tab1.group2.Social_Status == cache.enums.MaritalStatus.SINGLE ||
+																		tab1.group2.Social_Status == cache.enums.MaritalStatus.MARRIED">
+						<div class="form-input col-xs-12 col-sm-8">هل لديك تابعين أو معالين ؟ <span>*</span></div>
+						<div class="form-input col-xs-12 col-sm-4">
+							<input type="radio" ng-disabled="disableQuestions" class="hohCategoryYes" name="hohCategory" ng-checked="isWithDependent == true" name="dependentInfo" ng-click="prepareQuestionsArr(null , true); fileData.docCategory = null; data.group11.HoH_Category = null;"> نعم
+							<input type="radio" ng-disabled="disableQuestions" class="hohCategoryNo" name="hohCategory" ng-checked="isWithDependent == false" name="dependentInfo" ng-click="showDependentModale2()"> لا
+						</div>
+						<span class="error" ng-if="showFirstQuestionErrorMessage">الرجاء الإجابة على السؤال 'هل لديك تابعين أو معالين ؟'</span>
+				</div>
+					
+				<div class="col-xs-12 clear-col-padding" ng-repeat="question in questionArr">
+					<div class="form-input col-xs-12 col-sm-6" ng-if="question.showFlag">
+						<div class="form-input col-xs-12 col-sm-8">{{question.questionString}} <span>*</span></div>
+						<div class="form-input col-xs-12 col-sm-4">
+							<input type="radio" ng-disabled="disableQuestions" class="hohCategoryYes{{question.id}}" name="hohCategory{{question.id}}" value="question.HoH_Category" ng-checked="question.yesFlag" ng-click="fileData.docCategory = null; hideOtherQuestions(question.id)"> نعم
+							<input type="radio" ng-disabled="disableQuestions" class="hohCategoryNo{{question.id}}" name="hohCategory{{question.id}}" ng-click="checkQuestion(question.id)" ng-checked="question.noFlag"> لا
+						</div>
+						<span class="error" ng-if="question.questionErrorMessage">{{question.questionErrorMessage}}</span>
+					</div>
+				</div>
+			</ng-form>
+			<div ng-if="!hideDependent">
+				<div class="section-header col-xs-12">التابعين</div>
+				<div>
+					<table class="table grid-group-table">
+						<thead>
+							<tr>
+								<th style="width: 25%">الهوية</th>
+								<th class="hidden-xs" >الإسم</th>
+								<th style="width: 20%">صلة القرابة</th>
+								<th class="hidden-xs" style="width: 20%">الوظيفة</th>
+								<th>الإجراءات</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in data.group4.items">
+								<td ng-if="item.Dependent_Type == cache.enums.DependentType.SAUDI || item.Dependent_Type == cache.enums.DependentType.NON_SAUDI">{{item.Dependent_Nin}}</td>
+								<td ng-if="item.Dependent_Type == cache.enums.DependentType.GCC && item.GCC_Dependent_Nin">{{item.GCC_Dependent_Nin}}</td>
+								<td ng-if="item.Dependent_Type == cache.enums.DependentType.GCC && item.GCC_Dependent_Passport">{{item.GCC_Dependent_Passport}}</td>
+								<td class="hidden-xs">{{item | concatenateFourPartsDependentName}}</td>
+								<td>{{item.Dependent_Relationship | dynLookup13}}</td>
+								<td class="hidden-xs">{{item.Dependent_Employment_Status | dynLookup16}}</td>
+								
+								<td class="actions">
+									<button type="button" class="btn edit" style="width: 80px" ng-click="prepareItemForEditing(data.group4, $index)"
+										ng-disabled="data.group4.editableItem.index != -1">تعديل</button>
+									<button type="button" class="btn remove" style="width: 80px" ng-click="removeItem(data.group4, $index);"
+										my-confirm-modal="" ng-disabled="data.group4.editableItem.index != -1">حذف</button>
+								</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr ng-show="data.group4.items.length === 0">
+								<td style="text-align: center" colspan="{{32 + 1}}">لايوجد</td>
+							</tr>
+						</tfoot>
+					</table>
+					<div class="text-center">
+						<button type="button" class="btn add-grid-record" ng-click="data.group4.showAddForm = true;" ng-if="data.group4.showAddForm !== true">
+							إضافة تابع <i class="fa fa-plus"></i>
+						</button>
+					</div>
+				</div>
+				<ng-form name="group4FormOuter" novalidate>
+				<div class="grid-form-container col-xs-12" ng-if="data.group4.showAddForm === true">
+					<ng-form name="group4Form" novalidate>
+
+					<div class="alert alert-warning" ng-if="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.GCC">
+								الرجاء إدخال رقم الهوية أو جواز السفر الذي تم الدخول به للمملكة العربية السعودية 
+							</div>
+					
+					<div class="col-xs-12 clear-col-padding">
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">
+								نوع التابع<span>*</span>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<select ng-change="resetDependentFields()" ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="form-control" name="Dependent_Type" type="text" ng-model="data.group4.editableItem.data.Dependent_Type" required="required" my-touched
+									my-touched>
+									
+									<option value="31001">تابع سعودي</option>
+									<option value="31002">تابع من دول مجلس التعاون الخليجي</option>
+									<option value="31003">تابع غير سعودي/بطاقة تنقل</option>
+									
+								</select> 
+								<span class="error" ng-show="(group4Form.$submitted || form.$submitted || group4Form.Dependent_Type.$touched) && group4Form.Dependent_Type.$error.required">الرجاء اختيار قيمة صحيحة</span> 
+							</div>
+						</div>
+						
+						
+						
+						<div class="form-input col-xs-12 col-sm-6" ng-if="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.GCC">
+							<div class="col-xs-12 col-sm-4">
+								نوع الهوية<span>*</span>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<select ng-change="resetGCCDependentFields()" ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="form-control" name="GCC_Nin_Type" type="text" ng-model="data.group4.editableItem.data.GCC_Nin_Type" required="required" my-touched
+									my-touched>
+									
+									<option value="33001">هوية لدول مجلس التعاون الخليجي</option>
+									<option value="33002">جواز سفر لدول مجلس التعاون الخليجي</option>
+									
+								</select> 
+								<span class="error" ng-show="(group4Form.$submitted || form.$submitted || group4Form.GCC_Nin_Type.$touched) && group4Form.GCC_Nin_Type.$error.required">الرجاء اختيار قيمة صحيحة</span> 
+							</div>
+						</div>
+						
+						
+					</div>
+					
+					<div class="col-xs-12 clear-col-padding">
+						
+						
+						<div ng-if="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.GCC" class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">
+								الجنسية<span>*</span>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="form-control" name="GCC_Nationality" type="text" ng-model="data.group4.editableItem.data.GCC_Nationality" ng-required="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.GCC" my-touched
+									my-touched>
+									
+									<option value="101">الإمارات العربية المتحدة</option>
+									<option value="103">مملكة البحرين</option>
+									<option value="106">سلطنة عمان</option>
+									<option value="109">دولة الكويت</option>
+									<option value="108">دولة قطر</option>
+									
+								</select> 
+								<span class="error" ng-show="(group4Form.$submitted || form.$submitted || group4Form.GCC_Nationality.$touched) && group4Form.GCC_Nationality.$error.required">الرجاء اختيار قيمة صحيحة</span> 
+							</div>
+						</div>
+						
+						
+						<div class="form-input col-xs-12 col-sm-6" ng-if="data.group4.editableItem.data.Dependent_Type != cache.enums.DependentType.GCC">
+							<div class="col-xs-12 col-sm-4">
+								رقم الهوية<span>*</span>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<input ng-change="removeValidationMessage()" ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="form-control" name="Dependent_Nin" type="text" ng-model="data.group4.editableItem.data.Dependent_Nin" required="required" my-touched
+									ng-pattern="/^[12]\d{9}$/" maxlength="10" my-touched my-different-from-applicant-nin="" my-touched my-unique-grid-group-item-value="Dependent_Nin"
+									my-touched /> <span class="error" ng-show="(group4Form.$submitted || form.$submitted || group4Form.Dependent_Nin.$touched) && group4Form.Dependent_Nin.$error.required">الرجاء
+									إدخال الهوية الوطنية / الإقامة</span> <span class="error"
+									ng-show="(group4Form.$submitted || group4Form.Dependent_Nin.$touched) && group4Form.Dependent_Nin.$error.pattern">
+									الرجاء التأكد من صحة رقم الهوية المدخل									
+									</span> <span class="error"
+									ng-show="(group4Form.$submitted || group4Form.Dependent_Nin.$touched) && group4Form.Dependent_Nin.$error.differentfromapplicantnin">لايمكن إضافة
+									الهوية الوطنية/ الإقامة الخاصة بالمستفيد الرئيسي</span> <span class="error"
+									ng-show="(group4Form.$submitted || group4Form.Dependent_Nin.$touched) && group4Form.Dependent_Nin.$error.uniquegridgroupitemvalue">لايمكن تكرار
+									الهوية الوطنية/ الإقامة</span>
+									<span class="error"
+									ng-show="dependentTypeErrorMessage">الرجاء التأكد من صحة رقم الهوية المدخل</span>
+									
+							</div>
+						</div>
+						
+						<div class="form-input col-xs-12 col-sm-6" ng-if="data.group4.editableItem.data.GCC_Nin_Type == cache.enums.GccIdType.NIN">
+							<div class="col-xs-12 col-sm-4">
+								رقم هوية لدول مجلس التعاون الخليجي<span>*</span>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<input ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="form-control" name="GCC_Dependent_Nin" type="text" ng-model="data.group4.editableItem.data.GCC_Dependent_Nin" required="required" my-touched
+									maxlength="22" my-touched my-different-from-applicant-nin="" my-touched my-unique-grid-group-item-value="GCC_Dependent_Nin"
+									my-touched /> <span class="error" ng-show="(group4Form.$submitted || form.$submitted || group4Form.GCC_Dependent_Nin.$touched) && group4Form.GCC_Dependent_Nin.$error.required">الرجاء تعبئة البيانات المطلوبة</span>
+									<span class="error"
+									ng-show="(group4Form.$submitted || group4Form.GCC_Dependent_Nin.$touched) && group4Form.GCC_Dependent_Nin.$error.uniquegridgroupitemvalue">لايمكن تكرار
+									هوية مجلس التعاون الخليجي</span> 
+							</div>
+						</div>
+						
+						<div class="form-input col-xs-12 col-sm-6" ng-if="data.group4.editableItem.data.GCC_Nin_Type == cache.enums.GccIdType.PASSPORT">
+							<div class="col-xs-12 col-sm-4">
+								رقم جواز سفر لدول مجلس التعاون الخليجي<span>*</span>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<input ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="form-control" name="GCC_Dependent_Passport" type="text" ng-model="data.group4.editableItem.data.GCC_Dependent_Passport" required="required" my-touched
+									maxlength="18" my-touched my-different-from-applicant-nin="" my-touched my-unique-grid-group-item-value="GCC_Dependent_Passport"
+									my-touched /> <span class="error" ng-show="(group4Form.$submitted || form.$submitted || group4Form.GCC_Dependent_Passport.$touched) && group4Form.GCC_Dependent_Passport.$error.required">الرجاء تعبئة البيانات المطلوبة</span>
+									<span class="error"
+									ng-show="(group4Form.$submitted || group4Form.GCC_Dependent_Nin.$touched) && group4Form.GCC_Dependent_Passport.$error.uniquegridgroupitemvalue">لايمكن تكرار
+									جواز سفر مجلس التعاون الخليجي</span>  
+							</div>
+						</div>
+						
+						<div class="form-input col-xs-12 col-sm-6" ng-if="data.group4.editableItem.data.Dependent_Type != cache.enums.DependentType.GCC && data.group4.editableItem.data.Dependent_Type != cache.enums.DependentType.NON_SAUDI">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ الميلاد بالهجري <span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="day-field form-control" name="Dependent_Date_Of_Birth_HDay" ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_H.day"
+										my-hijri-date-options="days" required="required" my-touched my-check-hijri-date my-touched>null
+									</select> <select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="month-field form-control" name="Dependent_Date_Of_Birth_HMonth" ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_H.month"
+										my-hijri-date-options="months" required="required" my-touched my-touched>null
+									</select> <select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="year-field form-control" name="Dependent_Date_Of_Birth_HYear" ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_H.year"
+										my-hijri-date-options="years" required="required" my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(group4Form.$submitted || form.$submitted || group4Form.Dependent_Date_Of_Birth_HDay.$touched || group4Form.Dependent_Date_Of_Birth_HMonth.$touched || group4Form.Dependent_Date_Of_Birth_HYear.$touched) && (group4Form.Dependent_Date_Of_Birth_HDay.$error.required || group4Form.Dependent_Date_Of_Birth_HMonth.$error.required || group4Form.Dependent_Date_Of_Birth_HYear.$error.required)">الرجاء
+										إدخال تاريخ الميلاد بالهجري</span> <span class="error"
+										ng-show="(group4Form.$submitted || group4Form.Dependent_Date_Of_Birth_HDay.$touched) && group4Form.Dependent_Date_Of_Birth_HDay.$error.invalidhijridate">الرجاء
+										إدخال تاريخ الميلاد بالهجري</span>
+								</div>
+							</div>
+						
+					</div>
+					
+					
+					<div class="col-xs-12 clear-col-padding">
+						<div ng-if="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.GCC || data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.NON_SAUDI" class="form-input col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-4">
+									نوع تاريخ الميلاد<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="form-control" name="DoB_Type" type="text" ng-model="data.group4.editableItem.data.DoB_Type" required="required" my-touched
+										my-touched>
+										
+										<option value="0">هجري</option>
+										<option value="1">ميلادي</option>
+										
+									</select> 
+									<span class="error" ng-show="(group4Form.$submitted || form.$submitted || group4Form.DoB_Type.$touched) && group4Form.DoB_Type.$error.required">الرجاء اختيار قيمة صحيحة</span> 
+								</div>
+							</div>
+							
+							<div class="form-input col-xs-12 col-sm-6" ng-if="data.group4.editableItem.data.DoB_Type != 1 && (data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.GCC || data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.NON_SAUDI)">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ الميلاد بالهجري <span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="day-field form-control" name="Dependent_Date_Of_Birth_HDay" ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_H.day"
+										my-hijri-date-options="days" required="required" my-touched my-check-hijri-date my-touched>null
+									</select> <select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="month-field form-control" name="Dependent_Date_Of_Birth_HMonth" ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_H.month"
+										my-hijri-date-options="months" required="required" my-touched my-touched>null
+									</select> <select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="year-field form-control" name="Dependent_Date_Of_Birth_HYear" ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_H.year"
+										my-hijri-date-options="years" required="required" my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(group4Form.$submitted || form.$submitted || group4Form.Dependent_Date_Of_Birth_HDay.$touched || group4Form.Dependent_Date_Of_Birth_HMonth.$touched || group4Form.Dependent_Date_Of_Birth_HYear.$touched) && (group4Form.Dependent_Date_Of_Birth_HDay.$error.required || group4Form.Dependent_Date_Of_Birth_HMonth.$error.required || group4Form.Dependent_Date_Of_Birth_HYear.$error.required)">الرجاء
+										إدخال تاريخ الميلاد بالهجري</span> <span class="error"
+										ng-show="(group4Form.$submitted || group4Form.Dependent_Date_Of_Birth_HDay.$touched) && group4Form.Dependent_Date_Of_Birth_HDay.$error.invalidhijridate">الرجاء
+										إدخال تاريخ الميلاد بالهجري</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12 col-sm-6" ng-if="data.group4.editableItem.data.DoB_Type == 1 && data.group4.editableItem.data.Dependent_Type != null && data.group4.editableItem.data.Dependent_Type != undefined">
+	<!-- 						data.group4.editableItem.data.Dependent_Nin.charAt(0) == 2 -->
+								<div class="col-xs-12 col-sm-4">
+									تاريخ الميلاد بالميلادي <span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="day-field form-control" style="" name="Dependent_Date_Of_Birth_GDay"
+										ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_G.day" my-gregorian-date-options="days" required="required" my-touched
+										my-check-gregorian-date my-touched>null
+									</select> <select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="month-field form-control" style="" name="Dependent_Date_Of_Birth_GMonth"
+										ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_G.month" my-gregorian-date-options="months" required="required" my-touched my-touched>null
+									</select> <select ng-disabled="data.group4.editableItem.data.transaction_type != 1" class="year-field form-control" style="" name="Dependent_Date_Of_Birth_GYear"
+										ng-model="data.group4.editableItem.data.Dependent_Date_Of_Birth_G.year" my-gregorian-date-options="years" my-gregorian-date-options-ending-year="1900"
+										required="required" my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(group4Form.$submitted || form.$submitted || group4Form.Dependent_Date_Of_Birth_GDay.$touched || group4Form.Dependent_Date_Of_Birth_GMonth.$touched || group4Form.Dependent_Date_Of_Birth_GYear.$touched) && (group4Form.Dependent_Date_Of_Birth_GDay.$error.required || group4Form.Dependent_Date_Of_Birth_GMonth.$error.required || group4Form.Dependent_Date_Of_Birth_GYear.$error.required)">الرجاء
+									إدخال تاريخ الميلاد بالميلادي</span> <span class="error"
+										ng-show="(group4Form.$submitted || group4Form.Dependent_Date_Of_Birth_GDay.$touched) && group4Form.Dependent_Date_Of_Birth_GDay.$error.invalidgregoriandate">الرجاء
+										إدخال تاريخ الميلاد بالميلادي</span>
+								</div>
+							</div>
+						</div>
+					
+					
+					
+					<div class="col-xs-12 clear-col-padding">
+<!-- 					data.group4.editableItem.data.Dependent_Nin.charAt(0) != 2 -->
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">
+								صلة القرابة <span>*</span>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<select class="form-control" name="Dependent_Relationship" ng-model="data.group4.editableItem.data.Dependent_Relationship"
+									my-linked-dropdownlist-options="data.group4.editableItem.data.Dependent_Gender" required="required" my-touched
+									my-check-value-appearances="[{attributeName:'Dependent_Relationship',valueToBeChecked:'90503',numberOfAllowedAppearances:1,errorName:'moreThanOneHusbandAdded'},
+									{attributeName:'Dependent_Relationship',valueToBeChecked:'90504',numberOfAllowedAppearances:4 ,errorName:'moreThanFourWifesAdded'},
+									{attributeName:'Dependent_Relationship',valueToBeChecked:'90501',numberOfAllowedAppearances:1 ,errorName:'moreThanOneFather'},
+									{attributeName:'Dependent_Relationship',valueToBeChecked:'90502',numberOfAllowedAppearances:1 ,errorName:'moreThanOneMother'}]"
+									>
+									<option value="90503" ng-if="loggedInUser.gender == cache.enums.Gender.FEMALE && tab1.group2.Social_Status == cache.enums.MaritalStatus.MARRIED">زوج</option>
+									<option value="90504" ng-if="loggedInUser.gender == cache.enums.Gender.MALE && tab1.group2.Social_Status == cache.enums.MaritalStatus.MARRIED">زوجة</option>
+									<option value="90501" ng-if="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.SAUDI">أب</option>
+									<option value="90502">أم</option>
+									<option value="90505" ng-if="tab1.group2.Social_Status != cache.enums.MaritalStatus.SINGLE">ابن</option>
+									<option value="90506" ng-if="tab1.group2.Social_Status != cache.enums.MaritalStatus.SINGLE">ابنة</option>
+									<option value="90516" ng-if="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.SAUDI">تابع معال</option>
+									<option value="90507" ng-if="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.SAUDI">أخ</option>
+									<option value="90508" ng-if="data.group4.editableItem.data.Dependent_Type == cache.enums.DependentType.SAUDI">أخت</option>
+								</select> 
+								<span class="error"	ng-show="(group4Form.$submitted || form.$submitted  ||  group4Form.Dependent_Relationship.$touched) && group4Form.Dependent_Relationship.$error.required">
+								الرجاء اختيار صلة القرابة
+								</span> 
+								<span class="error"	ng-show="(group4Form.$submitted || group4Form.Dependent_Relationship.$dirty) && group4Form.Dependent_Relationship.$error.moreThanOneHusbandAdded">
+								لايمكن إضافة أكثر من تابع بصلة قرابة (زوج)
+								</span>
+								<span class="error"	ng-show="(group4Form.$submitted || group4Form.Dependent_Relationship.$dirty) && group4Form.Dependent_Relationship.$error.moreThanOneFather">
+								لايمكن إضافة أكثر من تابع بصلة قرابة (أب)
+								</span>
+								<span class="error"	ng-show="(group4Form.$submitted || group4Form.Dependent_Relationship.$dirty) && group4Form.Dependent_Relationship.$error.moreThanOneMother">
+								لايمكن إضافة أكثر من تابع بصلة قرابة (أم)
+								</span>
+								<span class="error"	ng-show="(group4Form.$submitted || group4Form.Dependent_Relationship.$dirty) && group4Form.Dependent_Relationship.$error.moreThanFourWifesAdded">
+								لايمكن إضافة أكثر من 4 تابعين بصلة قرابة (زوجة)
+								</span>
+							</div>
+						</div>
+						<div class="form-input col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-4">
+								الحالة الوظيفية <span>*</span>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<select class="form-control" name="Dependent_Employment_Status" ng-model="data.group4.editableItem.data.Dependent_Employment_Status" required="required"
+									my-touched>
+									<option value="16001">موظف حكومي</option>
+									<option value="16002">موظف قطاع خاص</option>
+									<option value="16003">عسكري</option>
+									<option value="16004">طالب</option>
+									<option value="16005">أعمال حرة</option>
+									<option value="16006">متقاعد من قطاع حكومي</option>
+									<option value="16007">متقاعد من قطاع خاص</option>
+									<option value="16009">لا يوجد وظيفة</option>
+									<option value="16010">دون سن العمل</option>
+									<option value="16011">موظف في قطاع غير ربحي</option>
+								</select> <span class="error"
+									ng-show="(group4Form.$submitted || form.$submitted || group4Form.Dependent_Employment_Status.$touched) && group4Form.Dependent_Employment_Status.$error.required">الرجاء
+									اختيار عنصر من القائمة</span>
+							</div>
+						</div>
+					</div>
+						
+	
+					<div class="form-input col-xs-12 clear-col-padding">
+						<button type="button" class="btn ok" style="width: 80px"
+							ng-click="group4Form.$submitted = true; group4Form.$valid && addDependent(data.group4);"
+							ng-if="data.group4.editableItem.index === -1">إضافة</button>
+						<button type="button" class="btn cancel" style="width: 80px" ng-click="data.group4.showAddForm = false; resetEditableItem(data.group4.editableItem); form.$submitted = false" ng-if="data.group4.editableItem.index === -1">إلغاء</button>
+						<button type="button" class="btn ok" style="width: 80px"
+							ng-click="group4Form.$submitted = true; group4Form.$valid && applyEditedDependent(data.group4);"
+							ng-if="data.group4.editableItem.index !== -1">تعديل</button>
+						<button type="button" class="btn cancel" style="width: 80px" ng-click="cancelEdit(data.group4)" ng-if="data.group4.editableItem.index !== -1">إلغاء</button>
+					</div>
+					</ng-form>
+				</div>
+				<input type="text" style="display: none !important" ng-model="data.group4.items.length" my-min-row-count="0" /> 
+					</ng-form>
+				</div>
+					
+		</div>
+		<div class="wizard-footer col-xs-12">
+			<div class="col-xs-12 clear-col-padding">
+				<div class="col-xs-12 col-sm-6 text-xs-center text-sm-right clear-col-padding">
+					<button class="btn save" style="width: 130px;" ng-click="form.$submitted = true; form.$valid && confirmHohChange('save');" ng-disabled="saveInProgress">
+						حفظ <i class="fa fa-save"></i>
+					</button>
+				</div>
+				<div class="col-xs-12 col-sm-6 text-xs-center text-sm-left clear-col-padding">
+					<button type="button" class="btn previous" style="width: 130px;" ng-click="nav.previousFunction()" ng-show="nav.showPreviousBtn"
+						ng-disabled="saveInProgress">
+						<i class="fa fa-arrow-circle-right"></i> السابق
+					</button>
+					<button type="button" class="btn next" style="width: 130px;" ng-click="form.$submitted = true; form.$valid && confirmHohChange('next');"
+						ng-disabled="saveInProgress">
+						التالي <i class="fa fa-arrow-circle-left"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

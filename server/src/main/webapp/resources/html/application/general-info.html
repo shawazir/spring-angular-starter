@@ -1,0 +1,215 @@
+<form name="form" novalidate>
+	<div class="wizard col-xs-12 clear-col-padding">
+		<div class="wizard-header col-xs-12 clear-col-padding">
+			<ul>
+				<li ng-class="{'active': nav.currentTabNumber === 100, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 100) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 100}" style="width: 12.5%;">
+					<a href="#/application/1">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 100) != cache.enums.ApplicantWizardTabStatus.COMPLETE">1</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 100) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات عامة
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 300, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 300) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 300}" style="width: 12.5%;">
+					<a href="#/application/2">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 300) != cache.enums.ApplicantWizardTabStatus.COMPLETE">2</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 300) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات العنوان
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 200, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 200) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 200}" style="width: 12.5%;">
+					<a href="#/application/3">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 200) != cache.enums.ApplicantWizardTabStatus.COMPLETE">3</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 200) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات التابعين
+					</a>
+				</li>
+		    	<li ng-class="{'active': nav.currentTabNumber === 600, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 600) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 600}" style="width: 12.5%;">
+					<a href="#/application/4">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 600) != cache.enums.ApplicantWizardTabStatus.COMPLETE">4</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 600) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						الإفصاح عن الدخل 
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 400, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 400) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 400}" style="width: 12.5%;">
+					<a href="#/application/5">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 400) != cache.enums.ApplicantWizardTabStatus.COMPLETE">5</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 400) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات العقارات
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 500, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 500) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 500}" style="width: 12.5%;">
+					<a href="#/application/6">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 500) != cache.enums.ApplicantWizardTabStatus.COMPLETE">6</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 500) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						بيانات الحساب البنكي
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 700, 'completed': loggedInUser.wizardProgressInfo.getTabStatus(200, 700) == cache.enums.ApplicantWizardTabStatus.COMPLETE && nav.currentTabNumber != 700}" style="width: 12.5%;">
+					<a href="#/application/7">
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 700) != cache.enums.ApplicantWizardTabStatus.COMPLETE">7</span>
+						<span ng-if="loggedInUser.wizardProgressInfo.getTabStatus(200, 700) == cache.enums.ApplicantWizardTabStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						إدارة المرفقات 
+					</a>
+				</li>
+				<li ng-class="{'active': nav.currentTabNumber === 1000000, 'completed': loggedInUser.profileStatus == cache.enums.ProfileStatus.COMPLETE && nav.currentTabNumber != 1000000}" style="width: 12.5%;">
+					<a href="#/application/8">
+						<span ng-if="loggedInUser.profileStatus != cache.enums.ProfileStatus.COMPLETE">8</span>
+						<span ng-if="loggedInUser.profileStatus == cache.enums.ProfileStatus.COMPLETE"><i class="fa fa-check"></i></span>
+						مراجعة
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		
+		<div id="socialStatus-save-modale" class='modal fade' tabindex='-1' role='dialog' hidden="true">
+			<div class='modal-dialog' role='document'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h4 class='modal-title'>تأكيد</h4>
+					</div>
+				<div class='modal-body'>
+					<p>بإكمال عملية التغيير سيتم حذف جميع المرفقات، علما أنه بعد التغيير يجب تحديث بياناتك وإعادة تقديم الطلب من جديد</p>
+					<p ng-if="modaleContent">{{modaleContent}}</p>
+				</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-default close-btn' data-dismiss='modal'>لا</button>
+					<button type='button' class='btn btn-primary ok-btn' ng-click="saveTabData()">نعم</button>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="socialStatus-next-modale" class='modal fade' tabindex='-1' role='dialog' hidden="true">
+			<div class='modal-dialog' role='document'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h4 class='modal-title'>تأكيد</h4>
+					</div>
+				<div class='modal-body'>
+					<p>بإكمال عملية التغيير سيتم حذف جميع المرفقات، علما أنه بعد التغيير يجب تحديث بياناتك وإعادة تقديم الطلب من جديد</p>
+					<p ng-if="modaleContent">{{modaleContent}}</p>
+				</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-default close-btn' data-dismiss='modal'>لا</button>
+					<button type='button' class='btn btn-primary ok-btn' ng-click="nav.nextFunction()">نعم</button>
+				</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="wizard-body col-xs-12">
+			<div class="alert alert-info col-xs-12 clear-col-padding required-fields-message">
+				هذه العلامة (<span>*</span>) تعني أن الحقل إجباري.
+			</div>
+			<ng-form name="group2Form" novalidate="" class="ng-pristine ng-invalid ng-invalid-required">
+			<div class="section-header col-xs-12">بيانات عامة</div>
+			<div class="col-xs-12 clear-col-padding">
+				<div class="form-input col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-4">
+						الحالة الاجتماعية
+						<!-- ngIf: true -->
+						<span ng-if="true" class="ng-scope">*</span>
+						<!-- end ngIf: true -->
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<select class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" name="Social_Status"
+							ng-model="data.group2.Social_Status" required="required" my-touched="">
+							<option class="" value="90202">متزوج</option>
+							<option class="" value="90203">أعزب</option>
+							<option class="" value="90204">مطلق</option>
+							<option class="" value="90205">أرمل</option></select> <span class="error ng-hide"
+							ng-show="(form.$submitted || group2Form.Social_Status.$touched) &amp;&amp; group2Form.Social_Status.$error.required">الرجاء
+							اختيار عنصر من القائمة</span>
+					</div>
+				</div>
+				<div class="form-input col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-4">
+						الحالة الصحية
+						<!-- ngIf: true -->
+						<span ng-if="true" class="ng-scope">*</span>
+						<!-- end ngIf: true -->
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<select class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" name="Health_Status"
+							ng-model="data.group2.Health_Status" required="required" my-touched="">
+							<option class="" value="27001">سليم</option>
+							<option class="" value="27002">إعاقة مؤقتة</option>
+							<option class="" value="27003">إعاقة دائمة</option></select> <span class="error ng-hide"
+							ng-show="(form.$submitted || group2Form.Health_Status.$touched) &amp;&amp; group2Form.Health_Status.$error.required">الرجاء
+							اختيار عنصر من القائمة</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 clear-col-padding">
+				<div class="form-input col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-4">
+						حالة القدرة على العمل
+						<!-- ngIf: true -->
+						<span ng-if="true" class="ng-scope">*</span>
+						<!-- end ngIf: true -->
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<select class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+							name="Work_Ability_Status" ng-model="data.group2.Work_Ability_Status" required="required" my-touched="">
+							<option class="" value="28001">غير قادر</option>
+							<option class="" value="28002">قادر على العمل</option></select> <span class="error ng-hide"
+							ng-show="(form.$submitted || group2Form.Work_Ability_Status.$touched) &amp;&amp; group2Form.Work_Ability_Status.$error.required">الرجاء
+							اختيار عنصر من القائمة</span>
+					</div>
+				</div>
+				<div class="form-input col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-4">
+						المستوى التعليمي
+						<!-- ngIf: true -->
+						<span ng-if="true" class="ng-scope">*</span>
+						<!-- end ngIf: true -->
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<select class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+							name="Education_Status" ng-model="data.group2.Education_Status" required="required" my-touched="">
+							<option class="" value="15001">أمي</option>
+							<option class="" value="15002">يقرأ ويكتب</option>
+							<option class="" value="15003">إبتدائي</option>
+							<option class="" value="15004">متوسط</option>
+							<option class="" value="15005">ثانوي</option>
+							<option class="" value="15006">دبلوم</option>
+							<option class="" value="15007">بكالوريوس</option>
+							<option class="" value="15008">ماجستير</option>
+							<option class="" value="15009">دكتوراه</option></select> <span class="error ng-hide"
+							ng-show="(form.$submitted || group2Form.Education_Status.$touched) &amp;&amp; group2Form.Education_Status.$error.required">الرجاء
+							اختيار عنصر من القائمة</span>
+					</div>
+				</div>
+			</div>
+			</ng-form>
+		</div>
+		<div class="wizard-footer col-xs-12">
+			<div class="col-xs-12 clear-col-padding">
+				<div class="col-xs-12 col-sm-6 text-xs-center text-sm-right clear-col-padding">
+					<button class="btn save" style="width: 130px;"
+						ng-click="form.$submitted = true; form.$valid &amp;&amp; CheckAndSaveTabData('save');" ng-show="true"
+						ng-disabled="saveInProgress">
+						حفظ <i class="fa fa-save"></i>
+					</button>
+				</div>
+				<div class="col-xs-12 col-sm-6 text-xs-center text-sm-left clear-col-padding">
+					<button type="button" class="btn previous ng-hide" style="width: 130px;" ng-click="nav.previousFunction()"
+						ng-show="nav.showPreviousBtn" ng-disabled="saveInProgress">
+						<i class="fa fa-arrow-circle-right"></i> السابق
+					</button>
+					<button class="btn next" style="width: 130px;"
+						ng-click="form.$submitted = true; form.$valid &amp;&amp; CheckAndSaveTabData('next');" ng-show="nav.showNextBtn"
+						ng-disabled="saveInProgress">
+						التالي <i class="fa fa-arrow-circle-left"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+
+
+
+	</div>
+</form>

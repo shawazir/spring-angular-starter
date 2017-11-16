@@ -1,0 +1,826 @@
+
+
+<div class="alert alert-warning">
+نأمل مراعاة أنه عندما تكون حالة استحقاقك (غير مستحق) لن تتم إعادة تقييم مطابقتك لضوابط الاستحقاق مستقبلاً، عند رغبتك في إعادة التقديم يرجى الضغط على زر (إعادة التقديم) بعد تصحيح/تفادي جميع أسباب عدم الاستحقاق الموضحة لكم.
+</div>
+
+
+<div id="no-attachment-confirmation-modale" class='modal fade' tabindex='-1' role='dialog' hidden="true">
+	<div class='modal-dialog' role='document'>
+		<div class='modal-content'>
+			<div class='modal-header'>
+				<h4 class='modal-title'>تأكيد</h4>
+			</div>
+		<div class='modal-body'>
+			هل انت متأكد من تقديم الاعتراض ؟				
+		</div>
+		<div class='modal-footer'>
+			<button type='button' class='btn btn-primary ok-btn col-sm-4 col-xs-12'  ng-click="raiseAppealWithNoDoc()">نعم</button>
+			<button type='button' class='btn btn-default close-btn col-sm-4 col-xs-12' data-dismiss='modal'>لا</button>
+			
+		</div>
+		</div>
+	</div>
+</div>
+
+<div id="appeal-document-modale" class='modal fade' tabindex='-1' role='dialog' hidden="true" data-backdrop="static" data-keyboard="false">
+	<ng-form name="group8Form">
+		<div class='modal-dialog' role='document'>
+			<div class='modal-content'>
+				<div class='modal-header'>
+					<h4 class='modal-title'>إضافة المرفقات</h4>
+				</div>
+			<div class='modal-body'>
+				<div ng-if="(infoList.length > 0 && infoList !== undefined)" class="alert alert-info">
+					<strong>المرفقات المطلوبة : </strong>
+					<ul>
+						<li ng-repeat="info in infoList">{{info}}</li>
+					</ul>
+						<strong>لا يمكن إضافة أكثر من (4) مرفقات</strong>
+						<br>
+						<strong ng-if="showNoFileMessage">لا يمكنك إضافة مرفقات حتى يتم الرد بقرار على المرفقات المرفوعة مسبقا من قبل خدمة العملاء</strong>
+				</div>
+							<div class="col-xs-12 clear-col-padding">
+								<div class="form-input col-xs-12">
+									<div class="col-xs-12 col-sm-4">
+										نوع المرفق <span></span>
+									</div>
+									<div class="col-xs-12 col-sm-8">
+										<select class="form-control" name="docCategory" ng-change="addType(fileData.docCategory)" ng-model="fileData.docCategory" ng-disabled="uploader.queue.length == 4"> 
+											<option value="0" ng-show="fileData.docCategory"></option>
+											<option ng-repeat="document in documentArray" ng-value="document.key">{{document.value}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						
+						<!-- Document meta data -->		
+						<div class="col-xs-12 clear-col-padding" ng-if="fileData.docCategory == 23005 || fileData.docCategory == 23007">
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ عقد الإيجار<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="day-field form-control" name="Rent_Contract_Date_HDay" ng-model="fileData.docIssueDate.day" my-hijri-date-options="days"
+										ng-required="fileData.docCategory == 23005 || fileData.docCategory == 23007" my-touched my-check-hijri-date my-touched>null
+									</select> <select class="month-field form-control" name="Rent_Contract_Date_HMonth" ng-model="fileData.docIssueDate.month" my-hijri-date-options="months"
+										ng-required="fileData.docCategory == 23005 || fileData.docCategory == 23007" my-touched my-touched>null
+									</select> <select class="year-field form-control" name="Rent_Contract_Date_HYear" ng-model="fileData.docIssueDate.year" my-hijri-date-options="years"
+										ng-required="fileData.docCategory == 23005 || fileData.docCategory == 23007" my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(form.$submitted || group8Form.Rent_Contract_Date_HDay.$touched || group8Form.Rent_Contract_Date_HMonth.$touched || group8Form.Rent_Contract_Date_HYear.$touched) && (group8Form.Rent_Contract_Date_HDay.$error.required || group8Form.Rent_Contract_Date_HMonth.$error.required || group8Form.Rent_Contract_Date_HYear.$error.required)">الرجاء
+										إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									مدة العقد بالأشهر<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="form-control" name="Rent_Contract_Validity_Period" ng-model="fileData.docValidityPeriod"
+										ng-required="fileData.docCategory == 23005 || fileData.docCategory == 23007">
+										<option class="" value="6">6</option>
+										<option class="" value="7">7</option>
+										<option class="" value="8">8</option>
+										<option class="" value="9">9</option>
+										<option class="" value="10">10</option>
+										<option class="" value="11">11</option>
+										<option class="" value="12">12</option>
+										<option class="" value="13">13</option>
+										<option class="" value="14">14</option>
+										<option class="" value="15">15</option>
+										<option class="" value="16">16</option>
+										<option class="" value="17">17</option>
+										<option class="" value="18">18</option>
+										<option class="" value="19">19</option>
+										<option class="" value="20">20</option>
+										<option class="" value="21">21</option>
+										<option class="" value="22">22</option>
+										<option class="" value="23">23</option>
+										<option class="" value="24">24</option>
+									</select> 
+								</div>
+								<span class="error"
+										ng-show="(form.$submitted  || group8Form.Rent_Contract_Validity_Period.$touched) && group8Form.Rent_Contract_Validity_Period.$error.required">الرجاء
+										إدخال قيمة صحيحة</span>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding" ng-if="fileData.docCategory == 23005 || fileData.docCategory == 23007">
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									تحديد المشمولين بالوثيقة<span>*</span>
+									<span my-tooltip="الرجاء ربط رب الأسرة والتابعين(إن وجدوا) بالمستندات بطريقة صحيحة وكاملة حتى لا يؤثر على أهلية رب الأسرة أو التابعين"></span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<div class="col-xs-12 col-sm-8" ng-dropdown-multiselect="" options="dropDownNins" selected-model="fileData.selectedNins" extra-settings="dropDownSettings" name="Document_Selected_Nins"></div>
+								<span class="error"
+										ng-show="(form.$submitted  || group8Form.Document_Selected_Nins.$touched) && fileData.selectedNins.length == 0">الرجاء
+										إدخال قيمة صحيحة</span>
+								</div>
+								
+							</div>
+						</div>
+						
+						
+						<div class="col-xs-12 clear-col-padding" ng-if="fileData.docCategory == 23016 || fileData.docCategory == 23017">
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									رقم الفاتورة<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<input class="form-control" ng-required="fileData.docCategory == 23016 || fileData.docCategory == 23017" name="Bill_Number" type="text" maxlength="20"
+										ng-model="fileData.docNumber" ng-pattern="/^[0-9]{0,20}$/"/> 
+										<span class="error"
+										ng-show="(form.$submitted  || group8Form.Bill_Number.$touched) && (group8Form.Bill_Number.$error.required || group8Form.Bill_Number.$error.pattern)">الرجاء إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									رقم الحساب<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<input class="form-control" ng-required="fileData.docCategory == 23016 || fileData.docCategory == 23017" name="Account_Number" type="text" maxlength="12"
+										ng-model="fileData.accountNumber" ng-pattern="/^[0-9]{0,20}$/"/> 
+										<span class="error"
+										ng-show="(form.$submitted  || group8Form.Account_Number.$touched) && (group8Form.Account_Number.$error.required || group8Form.Account_Number.$error.pattern)">الرجاء إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-xs-12 clear-col-padding" ng-if="fileData.docCategory == 23016 || fileData.docCategory == 23017">
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									تحديد المشمولين بالوثيقة<span>*</span>
+									<span my-tooltip="الرجاء ربط رب الأسرة والتابعين(إن وجدوا) بالمستندات بطريقة صحيحة وكاملة حتى لا يؤثر على أهلية رب الأسرة أو التابعين"></span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<div ng-dropdown-multiselect="" options="dropDownNins" selected-model="fileData.selectedNins" extra-settings="dropDownSettings" name="Document_Selected_Nins"></div>
+								<span class="error"
+										ng-show="(form.$submitted  || group8Form.Document_Selected_Nins.$touched) && fileData.selectedNins.length == 0">الرجاء
+										إدخال قيمة صحيحة</span>
+								</div>
+								
+							</div>
+						</div>
+						
+		
+						<div class="col-xs-12 clear-col-padding" ng-if="fileData.docCategory == 23006 || fileData.docCategory == 23008">
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									رقم الصك<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<input class="form-control" ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" name="Deed_Number" type="text"
+										ng-model="fileData.docNumber" ng-pattern="/\d+/" maxlength="100"/> 
+										<span class="error"
+										ng-show="(form.$submitted  || group8Form.Deed_Number.$touched) && (group8Form.Deed_Number.$error.required || group8Form.Deed_Number.$error.pattern)">الرجاء إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ الصك<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="day-field form-control" name="Deed_Date_HDay" ng-model="fileData.docIssueDate.day" my-hijri-date-options="days"
+										ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-check-hijri-date my-touched>null
+									</select> <select class="month-field form-control" name="Deed_Date_HMonth" ng-model="fileData.docIssueDate.month" my-hijri-date-options="months"
+										ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-touched>null
+									</select> <select class="year-field form-control" name="Deed_Date_HYear" ng-model="fileData.docIssueDate.year" my-hijri-date-options="years"
+										ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(form.$submitted || group8Form.Deed_Date_HDay.$touched || group8Form.Deed_Date_HMonth.$touched || group8Form.Deed_Date_HYear.$touched) && (group8Form.Deed_Date_HDay.$error.required || group8Form.Deed_Date_HMonth.$error.required || group8Form.Deed_Date_HYear.$error.required)">الرجاء
+										إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding" ng-if="fileData.docCategory == 23006 || fileData.docCategory == 23008">
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									رقم هوية المالك<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<input class="form-control" ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" name="Owner_Attachment_Fields_Id_Number" type="text"
+										ng-model="fileData.docNin" my-touched ng-pattern="/^[12]\d{9}$/" maxlength="10"> <span class="error"
+										ng-show="(form.$submitted  || group8Form.Owner_Attachment_Fields_Id_Number.$touched) && (group8Form.Owner_Attachment_Fields_Id_Number.$error.required || group8Form.Owner_Attachment_Fields_Id_Number.$error.pattern)">رقم
+										الهوية المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12" ng-if="fileData.docNin.charAt(0) != 2">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ ميلاد المالك<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="day-field form-control" name="Attachment_Fields_Date_Of_Birth_HDay" ng-model="fileData.docHDateOfBirth.day" my-hijri-date-options="days"
+										ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-check-hijri-date my-touched>null
+									</select> <select class="month-field form-control" name="Attachment_Fields_Date_Of_Birth_HMonth" ng-model="fileData.docHDateOfBirth.month"
+										my-hijri-date-options="months" ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-touched>null
+									</select> <select class="year-field form-control" name="Attachment_Fields_Date_Of_Birth_HYear" ng-model="fileData.docHDateOfBirth.year"
+										my-hijri-date-options="years" ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(form.$submitted || group8Form.Attachment_Fields_Date_Of_Birth_HDay.$touched || group8Form.Attachment_Fields_Date_Of_Birth_HMonth.$touched || group8Form.Attachment_Fields_Date_Of_Birth_HYear.$touched) && (group8Form.Attachment_Fields_Date_Of_Birth_HDay.$error.required || group8Form.Attachment_Fields_Date_Of_Birth_HMonth.$error.required || group8Form.Attachment_Fields_Date_Of_Birth_HYear.$error.required)">تاريخ
+										الميلاد المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12" ng-if="fileData.docNin.charAt(0) == 2">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ ميلاد المالك <span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="day-field form-control" style="" name="Attachment_Fields_Date_Of_Birth_GDay" ng-model="fileData.docGDateOfBirth.day"
+										my-gregorian-date-options="days" ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-check-gregorian-date
+										my-touched>null
+									</select> <select class="month-field form-control" style="" name="Attachment_Fields_Date_Of_Birth_GMonth" ng-model="fileData.docGDateOfBirth.month"
+										my-gregorian-date-options="months" ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-touched>null
+									</select> <select class="year-field form-control" style="" name="Attachment_Fields_Date_Of_Birth_GYear" ng-model="fileData.docGDateOfBirth.year"
+										my-gregorian-date-options="years" my-gregorian-date-options-ending-year="1900"
+										ng-required="fileData.docCategory == 23006 || fileData.docCategory == 23008" my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(form.$submitted || group8Form.Attachment_Fields_Date_Of_Birth_GDay.$touched || group8Form.Attachment_Fields_Date_Of_Birth_GMonth.$touched || group8Form.Attachment_Fields_Date_Of_Birth_GYear.$touched) && (group8Form.Attachment_Fields_Date_Of_Birth_GDay.$error.required || group8Form.Attachment_Fields_Date_Of_Birth_GMonth.$error.required || group8Form.Attachment_Fields_Date_Of_Birth_GYear.$error.required)">تاريخ
+										الميلاد المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding" ng-if="fileData.docCategory == 23006 || fileData.docCategory == 23008">
+								<div class="form-input col-xs-12">
+									<div class="col-xs-12 col-sm-4">
+										تحديد المشمولين بالوثيقة<span>*</span>
+										<span my-tooltip="الرجاء ربط رب الأسرة والتابعين(إن وجدوا) بالمستندات بطريقة صحيحة وكاملة حتى لا يؤثر على أهلية رب الأسرة أو التابعين"></span>
+									</div>
+									<div class="col-xs-12 col-sm-8">
+										<div ng-dropdown-multiselect="" options="dropDownNins" selected-model="fileData.selectedNins" extra-settings="dropDownSettings" name="Document_Selected_Nins"></div>
+									<span class="error"
+											ng-show="(form.$submitted  || group8Form.Document_Selected_Nins.$touched) && fileData.selectedNins.length == 0">الرجاء
+											إدخال قيمة صحيحة</span>
+									</div>
+									
+								</div>
+						</div>
+		
+						<div class="col-xs-12 clear-col-padding"
+							ng-if="fileData.docCategory == 23002 || fileData.docCategory == 23015 || fileData.docCategory == 23014 || fileData.docCategory == 23013 || fileData.docCategory == 23011 || fileData.docCategory == 23004 || fileData.docCategory == 23012 || fileData.docCategory == 23001 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23010">
+							<div class="form-input col-xs-12" ng-if="fileData.docCategory != 23015">
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory != 23009 && fileData.docCategory != 23011 && fileData.docCategory != 23014 && fileData.docCategory != 23010">
+									رقم الصك<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23009 || fileData.docCategory == 23010">
+									رقم المستند<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23011">
+									رقم الوثيقة<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23014">
+									رقم الخطاب<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<input class="form-control" ng-required="fileData.docCategory == 23002 || fileData.docCategory == 23014 || fileData.docCategory == 23013 || fileData.docCategory == 23011 || fileData.docCategory == 23004 || fileData.docCategory == 23012 || fileData.docCategory == 23001 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23010" 
+											name="Deed_Number" type="text"
+										ng-model="fileData.docNumber" maxlength="100"> <span class="error"
+										ng-show="(form.$submitted  || group8Form.Deed_Number.$touched) && group8Form.Deed_Number.$error.required">الرجاء إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+							
+							<div class="form-input col-xs-12" ng-if="fileData.docCategory != 23010">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ إصدار الوثيقة<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="day-field form-control" name="Document_Date_HDay" ng-model="fileData.docIssueDate.day" my-hijri-date-options="days"
+										ng-required="fileData.docCategory == 23002 || fileData.docCategory == 23015 || fileData.docCategory == 23014 || fileData.docCategory == 23013 || fileData.docCategory == 23011 || fileData.docCategory == 23004 || fileData.docCategory == 23012 || fileData.docCategory == 23001 || fileData.docCategory == 23003 || fileData.docCategory == 23009 "
+										my-touched my-check-hijri-date my-touched>null
+									</select> <select class="month-field form-control" name="Document_Date_Month" ng-model="fileData.docIssueDate.month" my-hijri-date-options="months"
+										ng-required="fileData.docCategory == 23002 || fileData.docCategory == 23015 || fileData.docCategory == 23014 || fileData.docCategory == 23013 || fileData.docCategory == 23011 || fileData.docCategory == 23004 || fileData.docCategory == 23012 || fileData.docCategory == 23001 || fileData.docCategory == 23003 || fileData.docCategory == 23009"
+										my-touched my-touched>null
+									</select> <select class="year-field form-control" name="Document_Date_HYear" ng-model="fileData.docIssueDate.year" my-hijri-date-options="years"
+										ng-required="fileData.docCategory == 23002 || fileData.docCategory == 23015 || fileData.docCategory == 23014 || fileData.docCategory == 23013 || fileData.docCategory == 23011 || fileData.docCategory == 23004 || fileData.docCategory == 23012 || fileData.docCategory == 23001 || fileData.docCategory == 23003 || fileData.docCategory == 23009"
+										my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(form.$submitted || group8Form.Document_Date_HDay.$touched || group8Form.Document_Date_HMonth.$touched || group8Form.Document_Date_HYear.$touched) && (group8Form.Document_Date_HDay.$error.required || group8Form.Document_Date_HMonth.$error.required || group8Form.Document_Date_HYear.$error.required)">الرجاء
+										إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12" ng-if="fileData.docCategory == 23010">
+								<div class="col-xs-12 col-sm-4">
+										رقم هوية السجين<span>*</span>
+									</div>
+									<div class="col-xs-12 col-sm-8">
+										<input class="form-control"
+											ng-required="fileData.docCategory == 23010"
+											name="Attachment_Fields_Id_Number" type="text" ng-model="fileData.docNin" my-touched ng-pattern="/^[12]\d{9}$/" maxlength="10"> <span
+											class="error"
+											ng-show="(form.$submitted  || group8Form.Attachment_Fields_Id_Number.$touched) && (group8Form.Attachment_Fields_Id_Number.$error.required || group8Form.Attachment_Fields_Id_Number.$error.pattern)">رقم
+											الهوية المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+											
+											<span
+											class="error"
+											ng-show="(fileData.docCategory == 23014 && fileData.docNin.charAt(0) == 1)">رقم
+											الهوية المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+									</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding"
+							ng-if="fileData.docCategory == 23002 || fileData.docCategory == 23015 || fileData.docCategory == 23014 || fileData.docCategory == 23013 || fileData.docCategory == 23011 || fileData.docCategory == 23004 || fileData.docCategory == 23012 || fileData.docCategory == 23001 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23010">
+							<div class="form-input col-xs-12"
+								ng-if="fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23014 || fileData.docCategory == 23012">
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23002">
+									رقم هوية الولي<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23001 || fileData.docCategory == 23004">
+									رقم هوية العائل<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23003">
+									رقم هوية الحاضن<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23009">
+									رقم هوية المريض<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23011 || fileData.docCategory == 23012">
+									رقم هوية المتغيب أو المفقود<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23013">
+									رقم هوية الأب/الزوج<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23014">
+									رقم هوية الزوج<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<input class="form-control"
+										ng-required="fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23014 || fileData.docCategory == 23012"
+										name="Attachment_Fields_Id_Number" type="text" ng-model="fileData.docNin" my-touched ng-pattern="/^[12]\d{9}$/" maxlength="10"> <span
+										class="error"
+										ng-show="(form.$submitted  || group8Form.Attachment_Fields_Id_Number.$touched) && (group8Form.Attachment_Fields_Id_Number.$error.required || group8Form.Attachment_Fields_Id_Number.$error.pattern)">رقم
+										الهوية المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+										
+										<span
+										class="error"
+										ng-show="(fileData.docCategory == 23014 && fileData.docNin.charAt(0) == 1)">رقم
+										الهوية المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12"
+								ng-if="fileData.docNin.charAt(0) != 2 && (fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23010 || fileData.docCategory == 23012)">
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23002">
+									تاريخ ميلاد الولي<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23001 || fileData.docCategory == 23004">
+									تاريخ ميلاد العائل<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23003">
+									تاريخ ميلاد الحاضن<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23009">
+									تاريخ ميلاد المريض<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23011 || fileData.docCategory == 23012">
+									تاريخ ميلاد المتغيب أو المفقود<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23013">
+									تاريخ ميلاد الأب/الزوج<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23010">
+									تاريخ ميلاد السجين<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="day-field form-control" name="Attachment_Fields_Date_Of_Birth_HDay" ng-model="fileData.docHDateOfBirth.day" my-hijri-date-options="days"
+										ng-required="fileData.docNin.charAt(0) == 1 && (fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23010 || fileData.docCategory == 23012)"
+										my-touched my-check-hijri-date my-touched>null
+									</select> <select class="month-field form-control" name="Attachment_Fields_Date_Of_Birth_HMonth" ng-model="fileData.docHDateOfBirth.month"
+										my-hijri-date-options="months"
+										ng-required="fileData.docNin.charAt(0) == 1 && (fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23010 || fileData.docCategory == 23012)"
+										my-touched my-touched>null
+									</select> <select class="year-field form-control" name="Attachment_Fields_Date_Of_Birth_HYear" ng-model="fileData.docHDateOfBirth.year"
+										my-hijri-date-options="years"
+										ng-required="fileData.docNin.charAt(0) == 1 && (fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23010 || fileData.docCategory == 23012)"
+										my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(form.$submitted || group8Form.Attachment_Fields_Date_Of_Birth_HDay.$touched || group8Form.Attachment_Fields_Date_Of_Birth_HMonth.$touched || group8Form.Attachment_Fields_Date_Of_Birth_HYear.$touched) && (group8Form.Attachment_Fields_Date_Of_Birth_HDay.$error.required || group8Form.Attachment_Fields_Date_Of_Birth_HMonth.$error.required || group8Form.Attachment_Fields_Date_Of_Birth_HYear.$error.required)">تاريخ
+										الميلاد المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+								</div>
+							</div>
+							<div class="form-input col-xs-12"
+								ng-if="fileData.docCategory == 23014 || (fileData.docNin.charAt(0) == 2 && (fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23012 || fileData.docCategory == 23013 || fileData.docCategory == 23014 || fileData.docCategory == 23010))">
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23002">
+									تاريخ ميلاد الولي<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23001 || fileData.docCategory == 23004">
+									تاريخ ميلاد العائل<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23003">
+									تاريخ ميلاد الحاضن<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23009">
+									تاريخ ميلاد المريض<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23011 || fileData.docCategory == 23012">
+									تاريخ ميلاد المتغيب أو المفقود<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23013">
+									تاريخ ميلاد الأب/الزوج<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23014">
+									تاريخ ميلاد الزوج<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-4" ng-if="fileData.docCategory == 23010">
+									تاريخ ميلاد السجين<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="day-field form-control" style="" name="Attachment_Fields_Date_Of_Birth_GDay" ng-model="fileData.docGDateOfBirth.day"
+										my-gregorian-date-options="days"
+										ng-required="fileData.docNin.charAt(0) == 2 && (fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23014 || fileData.docCategory == 23010)"
+										my-touched my-check-gregorian-date my-touched>null
+									</select> <select class="month-field form-control" style="" name="Attachment_Fields_Date_Of_Birth_GMonth" ng-model="fileData.docGDateOfBirth.month"
+										my-gregorian-date-options="months"
+										ng-required="fileData.docNin.charAt(0) == 2 && (fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23014 || fileData.docCategory == 23010)"
+										my-touched my-touched>null
+									</select> <select class="year-field form-control" style="" name="Attachment_Fields_Date_Of_Birth_GYear" ng-model="fileData.docGDateOfBirth.year"
+										my-gregorian-date-options="years" my-gregorian-date-options-ending-year="1900"
+										ng-required="fileData.docNin.charAt(0) == 2 && (fileData.docCategory == 23002 || fileData.docCategory == 23001 || fileData.docCategory == 23004 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23011 || fileData.docCategory == 23013 || fileData.docCategory == 23014 || fileData.docCategory == 23010)"
+										my-touched my-touched>null
+									</select> <span class="error"
+										ng-show="(form.$submitted || group8Form.Attachment_Fields_Date_Of_Birth_GDay.$touched || group8Form.Attachment_Fields_Date_Of_Birth_GMonth.$touched || group8Form.Attachment_Fields_Date_Of_Birth_GYear.$touched) && (group8Form.Attachment_Fields_Date_Of_Birth_GDay.$error.required || group8Form.Attachment_Fields_Date_Of_Birth_GMonth.$error.required || group8Form.Attachment_Fields_Date_Of_Birth_GYear.$error.required)">تاريخ
+										الميلاد المدخل غير صحيح، الرجاء التأكد والمحاولة مرة أخرى</span>
+								</div>
+							</div>
+							
+							<div class="form-input col-xs-12" ng-if="fileData.docCategory == 23010">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ دخول السجن<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select class="day-field form-control" name="Sentence_Start_Date" ng-model="fileData.docStartDate.day" my-hijri-date-options="days"
+										ng-required="fileData.docCategory == 23010" my-touched my-check-hijri-date my-touched>null
+									</select> <select class="month-field form-control" name="Sentence_Start_Date" ng-model="fileData.docStartDate.month" my-hijri-date-options="months"
+										ng-required="fileData.docCategory == 23010" my-touched my-touched>null
+									</select> <select class="year-field form-control" name="Sentence_Start_Date" ng-model="fileData.docStartDate.year" my-hijri-date-options="years"
+										ng-required="fileData.docCategory == 23010" my-touched my-touched>null
+									</select> <span class="error" ng-show="(form.$submitted || group8Form.Sentence_Start_Date.$touched) && (group8Form.Sentence_Start_Date.$error.required)">الرجاء
+										إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+							
+							
+						</div>
+						<div class="col-xs-12 clear-col-padding"
+							ng-if="fileData.docCategory == 23002 || fileData.docCategory == 23015 || fileData.docCategory == 23014 || fileData.docCategory == 23013 || fileData.docCategory == 23011 || fileData.docCategory == 23004 || fileData.docCategory == 23012 || fileData.docCategory == 23001 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23010">
+							<div class="form-input col-xs-12" ng-if="fileData.docCategory == 23010">
+								<div class="col-xs-8 col-sm-4">
+									لم يتم تحديده<span></span> <input type="checkbox" ng-click="disableSentenceEndDate()">
+								</div>
+							</div>
+							<div class="form-input col-xs-12" ng-if="fileData.docCategory == 23010">
+								<div class="col-xs-12 col-sm-4">
+									تاريخ الخروج من السجن<span>*</span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<select ng-disabled="disableSentence_End_Date" class="day-field form-control" name="Sentence_End_Date" ng-model="fileData.docEndDate.day"
+										my-hijri-date-options="days" ng-required="fileData.docCategory == 23010 && !disableSentence_End_Date" my-touched my-check-hijri-date my-touched>null
+									</select> <select ng-disabled="disableSentence_End_Date" class="month-field form-control" name="Sentence_End_Date" ng-model="fileData.docEndDate.month"
+										my-hijri-date-options="months" ng-required="fileData.docCategory == 23010 && !disableSentence_End_Date" my-touched my-touched>null
+									</select> <select ng-disabled="disableSentence_End_Date" class="year-field form-control" name="Sentence_End_Date" ng-model="fileData.docEndDate.year"
+										my-hijri-date-options="year" my-hijri-date-options-ending-year="current+80" ng-required="fileData.docCategory == 23010 && !disableSentence_End_Date" my-touched my-touched>null
+									</select> <span class="error" ng-show="(form.$submitted || group8Form.Sentence_End_Date.$touched) && (group8Form.Sentence_End_Date.$error.required)">الرجاء
+										إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 clear-col-padding"
+							ng-if="fileData.docCategory == 23002 || fileData.docCategory == 23015 || fileData.docCategory == 23014 || fileData.docCategory == 23013 || fileData.docCategory == 23011 || fileData.docCategory == 23004 || fileData.docCategory == 23012 || fileData.docCategory == 23001 || fileData.docCategory == 23003 || fileData.docCategory == 23009 || fileData.docCategory == 23010">
+							<div class="form-input col-xs-12">
+								<div class="col-xs-12 col-sm-4">
+									تحديد المشمولين بالوثيقة<span>*</span>
+									<span my-tooltip="الرجاء ربط رب الأسرة والتابعين(إن وجدوا) بالمستندات بطريقة صحيحة وكاملة حتى لا يؤثر على أهلية رب الأسرة أو التابعين"></span>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<div ng-dropdown-multiselect="" options="dropDownNins" selected-model="fileData.selectedNins" extra-settings="dropDownSettings" name="Document_Selected_Nins"></div>
+								<span class="error"
+										ng-show="(form.$submitted  || group8Form.Document_Selected_Nins.$touched) && fileData.selectedNins.length == 0">الرجاء
+										إدخال قيمة صحيحة</span>
+								</div>
+							</div>
+						</div>
+						
+						<!-- End document meta data -->	
+								
+							<div class="col-xs-12 clear-col-padding">
+							<div class="form-input col-xs-12">
+								<span class="btn btn-default btn-file"
+									ng-if=" uploader.queue.length < 4 
+											&& fileData.docCategory != null
+											&&((fileData.docIssueDate.day && fileData.docIssueDate.month && fileData.docIssueDate.year && fileData.docValidityPeriod && fileData.selectedNins.length > 0)
+											||fileData.docCategory > 23017
+											||(fileData.accountNumber && fileData.docNumber && fileData.selectedNins.length > 0)
+											||(fileData.docNumber && fileData.docIssueDate.day && fileData.docIssueDate.month && fileData.docIssueDate.year && fileData.docNin && fileData.selectedNins.length > 0 && ((fileData.docNin.charAt(0) == 1 && fileData.docHDateOfBirth.day && fileData.docHDateOfBirth.month && fileData.docHDateOfBirth.year) || (fileData.docNin.charAt(0) == 2 && fileData.docGDateOfBirth.day && fileData.docGDateOfBirth.month && fileData.docGDateOfBirth.year))) 
+											||(fileData.docNumber && fileData.docIssueDate.day && fileData.docIssueDate.month && fileData.docIssueDate.year && fileData.docNin && fileData.selectedNins.length > 0 && ((fileData.docNin.charAt(0) == 1 && fileData.docHDateOfBirth.day && fileData.docHDateOfBirth.month && fileData.docHDateOfBirth.year) || (fileData.docNin.charAt(0) == 2 && fileData.docGDateOfBirth.day && fileData.docGDateOfBirth.month && fileData.docGDateOfBirth.year))) 
+											||(disableSentence_End_Date == true && fileData.docNumber && fileData.docNin && fileData.docStartDate.day && fileData.docStartDate.month && fileData.docStartDate.year && fileData.selectedNins.length > 0 && ((fileData.docNin.charAt(0) == 1 && fileData.docHDateOfBirth.day && fileData.docHDateOfBirth.month && fileData.docHDateOfBirth.year) || (fileData.docNin.charAt(0) == 2 && fileData.docGDateOfBirth.day && fileData.docGDateOfBirth.month && fileData.docGDateOfBirth.year))) 
+											||((disableSentence_End_Date == false || disableSentence_End_Date == null) && fileData.docNumber && fileData.docNin && fileData.docStartDate.day && fileData.docStartDate.month && fileData.docStartDate.year && fileData.docEndDate.day && fileData.docEndDate.month && fileData.docEndDate.year && fileData.selectedNins.length > 0 && ((fileData.docNin.charAt(0) == 1 && fileData.docHDateOfBirth.day && fileData.docHDateOfBirth.month && fileData.docHDateOfBirth.year) || (fileData.docNin.charAt(0) == 2 && fileData.docGDateOfBirth.day && fileData.docGDateOfBirth.month && fileData.docGDateOfBirth.year))) 
+											||(fileData.docIssueDate.day && fileData.docIssueDate.month && fileData.docIssueDate.year && fileData.selectedNins.length > 0 && fileData.docCategory == '23015'))"
+									tooltip="المرفق يجب أن يكون بإحدى الصيغ الآتية (jpg – jpeg – png – bmp – pdf) وبشرط أن لايتجاوز حجم الملف 2 ميجا"> استعراض الملف <input
+									class="input" style="width: 169.38Px" type="file" nv-file-select="" uploader="uploader" accept='image/jpeg,image/jpg,image/bmp,image/gif,image/png,application/pdf,image‌​/x-eps'/>
+								</span>
+								
+								<span class="error" ng-show="fileTypeError == true">
+								الرجاء إدخال الملف بالطريقة الصحيحة، علمًا أن الصيغ المقبولة هي:
+									(jpg – jpeg – png – bmp – pdf),  والحد الأعلى لحجم الملف هو 2MB
+								
+								</span>	
+									<span class="error" ng-show="showAttachmentMsg">الرجاء إرفاق المستندات المطلوبة</span>
+							</div>
+						</div>
+						<div ng-if="uploader.queue.length > 0" class="col-xs-12 clear-col-padding">
+						<p>عدد الملفات المرفقة: {{ uploader.queue.length }}</p>
+						<span class="error" ng-show="showQueueErrorMessage">لا يمكن إضافة أكثر من (4) مرفقات</span>
+						<table class="table grid-group-table">
+							<thead>
+								<tr>
+									<th class="col-xs-2">نوع المستند</th>
+									<th class="col-xs-3">المستند المرفق</th>
+									<th class="col-xs-1 hidden-xs" ng-show="uploader.isHTML5"></th>
+									<th class="col-xs-1 hidden-xs">حالة الرفع</th>
+									<th class="col-xs-2">تفاصيل</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in uploader.queue">
+									<td>{{item.fileType}}</td>
+									<td class="long-text"><strong>{{ item.file.name }}</strong></td>
+									<td ng-show="uploader.isHTML5" class="hidden-xs">
+										<div class="progress" style="margin-bottom: 0;">
+											<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+										</div>
+									</td>
+									
+									<td class="text-center hidden-xs"><span ng-show="item.isSuccess"><i class="fa fa-check"></i></span> <span ng-show="item.isCancel"><i class="fa fa-ban"></i></span>
+										<span ng-show="item.isError"><i class="fa fa-times"></i></span>
+									</td>
+									<td nowrap>
+										<button  type="button" class="btn btn-danger btn-xs" ng-click="item.remove();" ng-disabled="item.isSuccess">
+											<span class="fa fa-trash"></span> حذف
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>	
+			</div>
+			<div class='modal-footer'>
+				<button type='button' class='btn btn-default close-btn' ng-click="clearData(true, true, true)">إغلاق</button>
+				<button type='button' class='btn btn-primary ok-btn' ng-click="uploadAndCreateAppeal()">رفع الملفات</button>
+			</div>
+			</div>
+		</div>
+	</ng-form>
+</div>
+
+<div class="summary-wrapper eligbility-status col-xs-12 ng-scope">
+		<div class="personal-info col-xs-12">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="name col-xs-12 col-sm-12 col-md-12 col-lg-12 ng-binding">{{loggedInUser.name}}</div>
+					</div>
+					
+					<div class="col-xs-12 ng-scope alert alert-warning text-center" ng-if="!eligibilityInfo" style="font-size: 1.2em;">
+						 لم يتم دراسة حالة الأهلية مسبقا
+					</div>
+					
+					<div class="col-xs-12" ng-if="eligibilityInfo">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="col-xs-6 col-sm-6 col-lg-4">حالة الاستحقاق:</div>
+							<div class="col-xs-6 col-sm-6 col-lg-8 ng-binding" ng-class="{1:'text-green', 0:'text-red'}[eligibilityInfo.eligibilityStatus]">
+							 	{{ eligibilityInfo.eligibilityStatus | userEligibilityStatus}} 
+							 
+							 <a ng-if="eligibilityInfo.eligibilityStatus==0 && loggedInUser.applicant.reapplyStatus == 0 && reapplyState == true" my-confirm-modal="هل أنت متأكد من اختيارك لإعادة التقديم؟" ng-click="reaply();"> (اعادة تقديم الطلب ) </a>
+							 
+							 <a ng-if="eligibilityInfo.eligibilityStatus==0 && loggedInUser.applicant.reapplyStatus != 0" > (تمت اعادة تقديم الطلب) </a>
+							 
+							 </div>
+						</div>
+						<div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="col-xs-6 col-sm-6 col-lg-5">تاريخ دراسة الاستحقاق:</div>
+							<div class="col-xs-6 col-sm-6 col-lg-7 ng-binding">{{eligibilityInfo.processDateH | cycleInt}}</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="eligibilityInfo.eligibilityStatus == 1">
+							<div class="col-xs-6 col-sm-6 col-lg-5">عدد التابعين المستحقين :</div>
+							<div class="col-xs-6 col-sm-6 col-lg-7 ng-binding">{{eligibilityInfo.numberOfDependenats}}  </div>
+						</div>
+					</div>
+					
+					
+				</div>
+				
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-if="eligibilityInfo">
+					<div class="well" style="max-width: 400px; margin: 0 auto 10px;">
+				      
+				      <button type="button" class="btn save btn-lg btn-block" 
+				       ng-if="eligibilityInfo.eligibilityStatus==0||eligibilityInfo.eligibilityStatus==2" 
+				       ng-click="getApplicantIneleigibilityReasons(eligibilityInfo.processDate,eligibilityInfo.processDateH);"> أسباب عدم استحقاق العائل  </button>
+				      
+				      <button type="button" class="btn save btn-lg btn-block"
+				       ng-if="eligibilityInfo.eligibilityStatus!=0 && eligibilityInfo.eligibilityStatus!=2" 
+				       ng-click="getApplicantDependentsEligibility();">تفاصيل استحقاق التابعين</button>
+				       
+				        <button type="button" class="btn save btn-lg btn-block" ng-click="goToEligibilityHistoryPage();">حالات الاستحقاق السابقة</button>
+				      
+				    </div>
+				</div>
+				
+			</div>
+		</div>
+</div>
+
+<!-- Applicant Reasons -->
+<div class="summary-wrapper col-xs-12" ng-if="showApplicantIneligibilityReasonsPage">
+	
+	<div class="row">
+		<div class="col-xs-3" style="background-color: white;">
+		</div>
+		<div class="well col-xs-6 text-center">
+			اسباب عدم استحقاق العائل
+		</div>
+		<div class="col-xs-3" style="background-color: white;">
+		</div>
+	</div>
+	
+	<div class="row" ng-if="eligibilityInfo.eligibilityStatus==0" >
+		<div class="alert alert-warning">
+			تنبيه:
+			<br>
+	
+			قبل رفع الاعتراض نرجو التأكد من اتباع الخطوات أدناه لمعالجة عدم استيفاء شروط الأهلية:
+			<br>
+			<ul>
+				<li> التأكد من أن حالتك الفعلية مطابقة لما تم الافصاح عنه في البوابة وفي حالة عدم التطابق الرجاء تحديث بياناتك في البوابة الإلكترونية، ومن ثم رفع الاعتراض. </li>
+				<li> في حال التأكد من تطابق الحالة الفعلية مع ما تم الافصاح عنه في البوابة نرجو تحديث بياناتك مع الجهة المختصة حسب سبب عدم الاهلية، ومن ثم رفع الاعتراض. </li>
+				<li> لمزيد من المعلومات أو للمساعدة يرجى الاتصال على 19912. </li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table grid-group-table ">			
+			<thead>				
+				<tr>					
+					<th class="col-xs-2"> تاريخ دراسة الاستحقاق</th>
+					<th class="col-xs-2 hidden-xs">رمز عدم الاستحقاق</th>
+					<th class="col-xs-6">تفاصيل السبب</th>
+					<th class="col-xs-2 hidden-xs">الاعتراض </th>
+				</tr>			
+			</thead>			
+			<tbody>		
+				<tr ng-repeat="reason in inEligibilityReasons | 
+	 				pagination: curPage * pageSize | limitTo: pageSize"
+				>
+					<td>{{inEligibilityReasonsProcessDateH | dateInt}}</td>
+					<td class="col-xs-2 hidden-xs">{{reason.reasonId}}</td>
+					<td>{{reason.ruleMessageAr}}</td>
+					<td><button type="button" class="btn btn-danger btn-xs" ng-disabled="reason.disableAppeal" ng-click="createAppeal(reason.reasonId, inEligibilityReasonsProcessDate, null, reason.nin, reason.ruleMessageAr, reason.ruleMessageDetailId, $index, null)">تقديم اعتراض</button></td>
+		
+				</tr>		
+			</tbody>			
+			<tfoot>				
+				<tr ng-show="!inEligibilityReasons || inEligibilityReasons.length===0" >					
+					<td style="text-align: center" colspan="11">لايوجد</td>				
+				</tr>
+			</tfoot>
+		
+		</table>
+	</div>
+	
+	<div class="pagination-div"
+		ng-show="inEligibilityReasons.length>pageSize">
+		<ul class="pager">
+			<li class="">
+				<a  ng-click="prevousPage();">السابق</a>
+			</li>
+			<li><span>صفحة {{curPage + 1}} من {{ numberOfPages() }}</span></li>
+			<li class="">
+				<a  ng-disabled=""
+					ng-click="nextPage();">التالي</a>
+			</li>
+		</ul>
+	</div>
+
+</div>
+
+
+
+<!------------- 		Details Page          ------------->
+
+<div class="dependent-eligibility col-xs-12" ng-if="showApplicantDependentsEligibilityPage">
+
+	<div class="row">
+			<div class="col-xs-3"  style="background-color: white;">
+		</div>
+		<div class="page-header col-xs-6 text-center">
+			تفاصيل استحقاق التابعين
+		</div>
+		<div class="col-xs-3"  style="background-color: white;">
+		</div>
+	</div>
+
+	
+	<div class="row" ng-if="!isAllDependentsEligible" >
+		<div class="alert alert-warning">
+			تنبيه:
+			<br>
+	
+			قبل رفع الاعتراض نرجو التأكد من اتباع الخطوات أدناه لمعالجة عدم استيفاء شروط الأهلية:
+			<br>
+			<ul>
+				<li> التأكد من أن حالتك الفعلية مطابقة لما تم الافصاح عنه في البوابة وفي حالة عدم التطابق الرجاء تحديث بياناتك في البوابة الإلكترونية، ومن ثم رفع الاعتراض. </li>
+				<li> في حال التأكد من تطابق الحالة الفعلية مع ما تم الافصاح عنه في البوابة نرجو تحديث بياناتك مع الجهة المختصة حسب سبب عدم الاهلية، ومن ثم رفع الاعتراض. </li>
+				<li> لمزيد من المعلومات أو للمساعدة يرجى الاتصال على 19912. </li>
+			</ul>
+		</div>
+	</div>
+	
+
+	<div class="row eleigibility-details"  >
+	
+<!------------- 		Details Page -> Applicant Reasons Page          ------------->
+
+		<div class="dependents-list col-xs-12 "  >
+			<div class="dependent-eligibility-box " 
+			ng-class="{1:'green-box', 0:'red-box', '':'hidden'}[dependent.eligibilitySatus]" 
+			ng-repeat="dependent in dependentsEligibilityInfo" 
+			ng-click="dependent.eligibilitySatus==0 && getDependentineligibilityReasons(dependent);"
+			>
+				<div class="row">
+				
+					<div class="col-xs-12 col-md-6 data">
+						<div class="col-xs-12 col-md-1 field-title">الاسم :</div>
+						<div class="col-xs-12 col-md-7 field-value">{{dependent|concatenateFourPartsName}}</div>
+						<div class="col-xs-12 col-md-2 field-title">صلة القرابة :</div>
+						<div class="col-xs-12 col-md-2 field-value" ng-if="!dependent.relationShip">(تم حذف التابع)</div>
+						<div class="col-xs-12 col-md-2 field-value" ng-if="dependent.relationShip">{{dependent.relationShip | dynLookup13}}</div>
+					</div>
+					
+					<div class="col-xs-12 col-md-6 data">
+						<div class="col-xs-12 col-md-4 field-title">تاريخ دراسة الاستحقاق :</div>
+						<div class="col-xs-12 col-md-2 field-value">{{dependent.processDateH | cycleInt}}</div>
+						
+						<div class="col-xs-12 col-md-3 field-title">حالة الاستحقاق :</div>
+						<div class="col-xs-12 col-md-3 field-value">{{dependent.eligibilitySatus | userEligibilityStatus}} </div>
+					</div>
+					
+				</div>
+				
+				<div class="dependent-reasons-table table-responsive"  ng-show="dependent.showResons">
+					<table class="table grid-group-table">			
+						<thead>				
+							<tr>					
+								<th class="col-xs-2 ">رمز عدم الاستحقاق</th>
+								<th class="col-xs-8">تفاصيل السبب</th>
+								<th class="col-xs-2 ">الاعتراض </th>
+							</tr>			
+						</thead>			
+						<tbody>
+							<tr ng-repeat="reason in applicantDependentsEligibilityInfo[$index].reasons">
+								<td>{{reason.reasonId}}</td>
+								<td>{{reason.ruleMessageAr}}</td>
+								<td><button type="button" class="btn btn-danger btn-xs" ng-disabled="reason.disableAppeal" ng-click="createAppeal(reason.reasonId, dependent.processDate, dependent.dependentNin , dependent.applicantNin, reason.ruleMessageAr, reason.ruleMessageDetailId, $index, $parent.$index)">تقديم اعتراض</button></td>
+							</tr>				
+						</tbody>			
+						<tfoot>				
+							<tr ng-show="!dependentIneligibilityReasons || dependentIneligibilityReasons.length === 0">					
+								<td style="text-align: center" colspan="3">لايوجد</td>				
+							</tr>			
+						</tfoot>		
+					</table>
+				</div>
+				
+				
+				<div ng-if="dependent.eligibilitySatus==0 && !dependent.showResons" class="row more-details-text">
+					<div class="col-xs-12 field-title">اضغط لمزيد من التفاصيل</div>
+				</div>
+			</div>
+			
+			
+			<div class="dependent-eligibility-box " 
+			ng-class="green-box" 
+			ng-if="!dependentsEligibilityInfo || dependentsEligibilityInfo.length==0" 
+			>
+				<div class="row">
+					<div class="col-xs-12 col-md-5 field-title"></div>
+					<div class="col-xs-12 col-md-7 field-title">لا يوجد تابعين لعرضهم</div>
+				</div>
+			</div>
+
+		</div>
+		
+<!------------- 		END OF Applicant Reasons Page          ------------->
+		
+		
+		
+		
+		
+		
+		
+<!------------- 		Details Page -> Dependents Reasons Page          ------------->
+		
+		
+		
+<!------------- 		END OF Dependents Reasons Page          ------------->
+	
+	</div>
+	
+</div>

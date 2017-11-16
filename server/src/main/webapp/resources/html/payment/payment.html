@@ -1,0 +1,119 @@
+<div class="summary-wrapper col-xs-12 ng-scope">
+		<div class="personal-info col-xs-12">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="name col-xs-12 col-sm-12 col-md-12 col-lg-12 ng-binding">{{loggedInUser.name}}</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-12 col-lg-4">حالة الدفعة الحالية:</div>
+						<div ng-if="!paymentInfo" class="col-xs-12 col-sm-6 col-lg-6">لايوجد</div>
+						<div ng-if="paymentInfo" class="col-xs-12 col-sm-12 col-lg-7 ng-binding" ng-class="{1:'text-green', 0:'text-red'}[eligibilityInfo.eligibilityStatus]">
+						 	{{paymentInfo.paymentStatus}}
+						 
+						 
+						 </div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-12 col-lg-4">تاريخ الدفعة:</div>
+						<div ng-if="!paymentInfo" class="col-xs-12 col-sm-6 col-lg-6">لايوجد</div>
+						<div ng-if="paymentInfo" class="col-xs-12 col-sm-12 col-lg-6 ng-binding">{{paymentInfo.paymentDate | dateInt}}</div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-12 col-lg-4">عدد المستحقين :</div>
+						<div ng-if="!paymentInfo" class="col-xs-12 col-sm-6 col-lg-6">لايوجد</div>
+						<div ng-if="paymentInfo" class="col-xs-12 col-sm-12 col-lg-6 ng-binding">{{paymentInfo.numberOFEligibleDependents}} </div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-12 col-lg-4">رقم الدفعة :</div>
+						<div ng-if="!paymentInfo" class="col-xs-12 col-sm-6 col-lg-6">لايوجد</div>
+						<div ng-if="paymentInfo" class="col-xs-12 col-sm-12 col-lg-6 ng-binding">{{paymentInfo.paymentNumber}} </div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-6 col-lg-6">إجمالي المبالغ المرتجعة :</div>
+						<div ng-if="!paymentInfo" class="col-xs-12 col-sm-6 col-lg-6" >لايوجد</div>
+						<div ng-if="paymentInfo" class="col-xs-12 col-sm-6 col-lg-6 ng-binding" >
+						 	{{paymentInfo.refund}}
+						 </div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-6 col-lg-6">المبلغ المدفوع :</div>
+						<div ng-if="!paymentInfo" class="col-xs-12 col-sm-6 col-lg-6" >لايوجد</div>
+						<div ng-if="paymentInfo" class="col-xs-12 col-sm-6 col-lg-6 ng-binding">{{paymentInfo.amountPaid}}</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 ">
+					<div class="info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-6 col-lg-6">الرقم المرجعي للدفعة :</div>
+						<div ng-if="!paymentInfo" class="col-xs-12 col-sm-6 col-lg-6" >لايوجد</div>
+						<div ng-if="paymentInfo" class="col-xs-12 col-sm-6 col-lg-6 ng-binding">{{paymentInfo.paymentRefrenceNumber}} </div>
+					</div>
+					<div class="info col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-6 col-lg-6">سبب الرفض :</div>
+						<div ng-if="!paymentInfo || !paymentInfo.rejectionReason" class="col-xs-12 col-sm-6 col-lg-6">لايوجد</div>
+						<div ng-if="paymentInfo && paymentInfo.rejectionReason" class="col-xs-12 col-sm-6 col-lg-6" >
+						 	{{paymentInfo.rejectionReason}}
+						 </div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="row" style="max-width: 400px;margin: 0px auto 10px;padding-top: 20px;">
+			 	<button type="button" class="btn save btn-lg btn-block"  ng-if="((isRejectedPaymentExist && loggedInUser.applicant.bankAccountStatus == 31001 ) || (loggedInUser.applicant.bankAccountStatus == 31003))" my-confirm-modal="هل تم حل المشكلة المسببة لرفض الدفعات المالية من قبل البنك ؟" ng-click="resumePayment();"> تأكيد الحساب البنكي </button>
+			 </div>
+			 <div class="row" ng-if="!showPaymentHistory" style="max-width: 400px;margin: 0px auto 10px;padding-top: 10px;">
+			      <button type="button" class="btn save btn-lg btn-block"  ng-click="getPaymentHistory()"> مشاهدة الدفعات السابقة </button>
+			</div>
+			
+		</div>
+		
+</div>
+
+<div class="payment-history col-xs-12" ng-if="showPaymentHistory">
+
+	<div class="row" style="background: none;">
+			<div class="col-xs-3" style="background-color: white;">
+		</div>
+		<div class="page-header col-xs-6 text-center">
+			تاريخ الدفعات السابقة
+		</div>
+		<div class="col-xs-3" style="background-color: white;">
+		</div>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table grid-group-table">
+			<thead>
+				<th style="width: 15%"  class="hidden-xs" >رقم الدفعة</th>
+				<th style="width: 10%" class="">تاريخ الدفعة</th>
+				<th style="width: 10%" >اجمالي المبالغ المرتجعة</th>				
+				<th style="width: 10%" >المبلغ المدفوع</th>
+				<th style="width: 5%" >عدد المستحقين</th>
+				<th style="width: 10%" >حالة الصرف</th>
+				<th style="width: 15%"  class="hidden-xs">الرقم المرجعي للدفعة</th>
+				<th style="width: 20%">سبب الرفض</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="payment in paymentHistory">
+					<td  class="hidden-xs">{{payment.paymentNumber}}</td>
+					<td  class="">{{payment.paymentDate | dateInt}}</td>
+					<td>{{payment.refund}}</td>
+					<td>{{payment.amountPaid}}</td>
+					<td>{{payment.numberOFEligibleDependents}}</td>
+					<td>{{payment.paymentStatus}}</td>
+					<td  class="hidden-xs">{{payment.paymentRefrenceNumber}}</td>
+					<td>{{payment.rejectionReason}}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="7" ng-if="paymentHistory.length==0" ></td>
+				</tr>
+			
+			</tfoot>
+			
+		</table>
+	</div>
+</div>

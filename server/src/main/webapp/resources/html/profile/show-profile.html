@@ -1,0 +1,117 @@
+	<div class="page-header">
+		البيانات الشخصية - معلومات الحساب
+		<div ng-if="false" class="na-page-actions">
+			<a href="" class="font-minus"> -A </a><a href="" class="font-plus"> +A </a>
+		</div>
+	</div>
+	<div class="summary-wrapper col-xs-12">
+		<div class="personal-info col-xs-12">
+			<div class="name col-xs-12">{{loggedInUser.name}}</div>
+			<div class="info col-xs-6 col-sm-6">
+				<div class="col-xs-12 col-sm-6 col-lg-4">الجنس :</div>
+				<div class="col-xs-12 col-sm-6 col-lg-8">{{loggedInUser.gender |gender}} </div>
+			</div>
+			<div class="info col-xs-6 col-sm-6">
+				<div class="col-xs-12 col-sm-6 col-lg-4">العمر:</div>
+				<div class="col-xs-12 col-sm-6 col-lg-8">{{loggedInUser.applicantAge}}</div>
+			</div>
+			<div class="info col-xs-6 col-sm-6">
+				<div class="col-xs-12 col-sm-6 col-lg-4">الجنسية:</div>
+				<div class="col-xs-12 col-sm-6 col-lg-8" ng-if="loggedInUser.nin.startsWith('1')">سعودي</div>
+				<div class="col-xs-12 col-sm-6 col-lg-8" ng-if="!loggedInUser.nin.startsWith('1')">{{loggedInUser.applicant.nationality}}</div>
+			</div>
+			<div class="info col-xs-6 col-sm-6">
+				<div class="col-xs-12 col-sm-6 col-lg-4">تاريخ الميلاد :</div>
+				<div class="col-xs-12 col-sm-6 col-lg-8" ng-if="loggedInUser.dateOfBirth">{{loggedInUser.dateOfBirth | dateInt}} هـ</div>
+				<div class="col-xs-12 col-sm-6 col-lg-8" ng-if="!loggedInUser.dateOfBirth">{{loggedInUser.dateOfBirthGregorian}}</div>
+			</div>
+			<div class="info col-xs-12 col-sm-6">
+				<div class="col-xs-12 col-sm-6 col-lg-4">تاريخ إصدار الهوية:</div>
+				<div class="col-xs-12 col-sm-6 col-lg-8">{{loggedInUser.applicantidIssueDate| dateInt}} هـ</div>
+			</div>
+			<div class="info col-xs-12 col-sm-6">
+				<div class="col-xs-12 col-sm-6 col-lg-4">مكان إصدار الهوية:</div>
+				<div class="col-xs-12 col-sm-6 col-lg-8">{{loggedInUser.applicantIdIssueLocation}}</div>
+			</div>
+
+		</div>
+		<div class="account-info col-xs-12">
+		<div class="info col-xs-12 col-sm-4">
+			<div class="accepted" ng-if="userEligibilityStatus[0].status === 1">
+				<img src="resources/img/accepted.png">
+				<p>تم قبول الطلب</p>
+			</div>
+			<div class="accepted" ng-if="userEligibilityStatus[0].status === 0">
+				<img src="resources/img/in-progress.png">
+				<p>جاري معالجة الطلب</p>
+			</div>
+		</div>
+		<div class="account-info col-xs-12">
+	
+				<div class="info col-xs-12 col-sm-4" ng-class="{deactivate: profile.registrationStatus == 'SUSPENDED'}">
+					<div class="col-xs-12">حالة الطلب</div>
+					<div class="col-xs-12">{{applicationStatus | applicationStatus }}</div>
+				</div>
+			
+				<div class="info col-xs-12 col-sm-4">
+					<div class="col-xs-12">تاريخ التسجيل</div>
+					<div class="col-xs-12">{{loggedInUser.applicant.registrationDate}}</div>
+				</div>
+
+
+				<div class="info col-xs-12 col-sm-4">
+					<div class="col-xs-12">تاريخ آخر تسجيل دخول</div>
+					<div class="col-xs-12">{{lastLoginTimestamp | default}}</div>
+				</div>
+		</div>
+		<div class="account-information" ng-show="userEligibilityStatus.status==0">
+			<h3 class="table-title">نتائج الإستحقاق</h3>
+			<div class="profile-text-right col-lg-6 col-sm-6">
+				<div class="info col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-6 col-lg-4">حالة الإستحقاق :</div>
+					<div class="col-xs-12 col-sm-6 col-lg-8">{{userEligibilityStatus.status | userEligibilityStatus}}</div>
+				</div>
+			</div>
+			<div class="profile-text-left col-lg-6 col-sm-6">
+				<div class="info col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-6 col-lg-4">تاريخ الإستحقاق :</div>
+					<div class="col-xs-12 col-sm-6 col-lg-8">{{userEligibilityStatus.date}}</div>
+				</div>
+			</div>
+			<div class="profile-text-right col-lg-6 col-sm-6">
+				<div class="info col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-6 col-lg-4">الأسباب :</div>
+				</div>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="col-md-7">السبب</th>
+						<th class="col-md-3">الجهات</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="eligibilityReasons in userEligibilityStatus.eligibilityItemReasons">
+						<td>{{eligibilityReasons.messageAr}}</td>
+						<td>{{eligibilityReasons.agencyName}}</td>
+						<td colspan="4" ng-show="userEligibilityStatus.eligibilityItemReasons === 0">لاتوجد أسباب</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div ng-if="false" class="side-banners col-lg-3">
+	<div class="message-box col-sm-6 col-xs-12 col-lg-12" ng-if="loggedInUser.notifications.length !== 0">
+		<h1>
+			<i class="fa fa-envelope"></i>صندوق الرسائل
+		</h1>
+		<ul>
+			<li ng-repeat="notification in loggedInUser.notifications"><a href="#/notifications"><i class="fa fa-caret-left"></i>{{notification.msg.substring(0,50);}}...</a></li>
+		</ul>
+	</div>
+	<a class="banner col-sm-6 col-xs-12 col-lg-12" href="#/eligibility-rules"> <img src="resources/img/icon-1.png" alt="شروط الإستحقاق" title="شروط الإستحقاق">
+		<p>شروط الإستحقاق</p></a> <a class="banner col-sm-6 col-xs-12 col-lg-12" href="#/contact-us"> <img src="resources/img/icon-2.png" alt="تحتاج الى مساعدة"
+		title="تحتاج الى مساعدة">
+		<p>تحتاج الى مساعدة</p></a>
+</div>
