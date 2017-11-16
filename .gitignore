@@ -30,6 +30,7 @@ target/
 # PDT-specific
 .buildpath
 
+node_modules/
 
 #################
 ## Visual Studio
