@@ -38,5 +38,6 @@
 	<mvc:resources mapping="/index-dev.html" location="/index-dev.html" />
 	<mvc:resources mapping="/not-found.html" location="/not-found.html" />
 	<mvc:resources mapping="/error.html" location="/error.html" />
+	<mvc:resources mapping="/*.*" location="/*.*" />
 
 </beans>
