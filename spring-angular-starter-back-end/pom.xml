@@ -3,13 +3,12 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-<!-- 		Change the coordinates -->
-		<groupId>javaee-angular-cli-starter</groupId>
-		<artifactId>parent</artifactId>
+		<groupId>sa.csmarc</groupId>
+		<artifactId>spring-angular-starter</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 <!-- 	Change this -->
-	<artifactId>server</artifactId>
+	<artifactId>spring-angular-starter-back-end</artifactId>
 	<packaging>war</packaging>
 
 	<properties>
