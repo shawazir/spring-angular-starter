@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				[%d{yyyy-MM-dd hh:mm:ss a}] [%-5p] [%t] [%logger{0}] %m%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="sa.csmarc.example" level="DEBUG" />
+	<logger name="org.springframework" level="ERROR" />
+	<logger name="org.hibernate" level="ERROR" />
+
+	<root level="ERROR">
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>
