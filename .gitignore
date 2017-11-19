@@ -31,6 +31,8 @@ target/
 .buildpath
 
 node_modules/
+.idea/
+*.iml
 
 #################
 ## Visual Studio
