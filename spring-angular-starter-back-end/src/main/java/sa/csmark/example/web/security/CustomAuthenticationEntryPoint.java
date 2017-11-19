@@ -1,4 +1,4 @@
-package com.elm.ssp.registration.web.security;
+package sa.csmark.example.web.security;
 
 import java.io.IOException;
 

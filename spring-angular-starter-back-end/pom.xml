@@ -7,7 +7,6 @@
 		<artifactId>spring-angular-starter</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-<!-- 	Change this -->
 	<artifactId>spring-angular-starter-back-end</artifactId>
 	<packaging>war</packaging>
 
@@ -29,6 +28,7 @@
 		<powermock.version>1.5.6</powermock.version>
 		<jackson.version>2.4.3</jackson.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<compiler.plugin.version>3.1</compiler.plugin.version>
 	</properties>
 
 	<build> 
@@ -38,19 +38,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>${compiler.plugin.version}</version>
 				<configuration>
 					<fork>true</fork>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
 				</configuration>
-			</plugin>
-
-<!-- 			Is this really needed? -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.0.0</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -347,6 +340,4 @@
 			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
-
-
 </project>

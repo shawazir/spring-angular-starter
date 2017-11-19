@@ -1,26 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>sa.csmarc</groupId>
 		<artifactId>spring-angular-starter</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<modelVersion>4.0.0</modelVersion>
-
 	<artifactId>spring-angular-starter-front-end</artifactId>
 	<packaging>war</packaging>
+
+	<properties>
+		<exec.plugin.version>1.6.0</exec.plugin.version>
+		<war.plugin.version>3.0.0</war.plugin.version>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.6.0</version>
+				<version>${exec.plugin.version}</version>
 				<executions>
 					<execution>
 						<id>install npm</id>
 						<configuration>
-							<workingDirectory>./src/</workingDirectory>
+							<workingDirectory>./src</workingDirectory>
 							<executable>npm</executable>
 							<arguments>
 								<argument>install</argument>
@@ -52,7 +57,7 @@
 
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>${war.plugin.version}</version>
 				<configuration>
 					<webResources>
 						<resource>

@@ -1,4 +1,4 @@
-package com.elm.ssp.registration.web.controller;
+package sa.csmark.example.web.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
