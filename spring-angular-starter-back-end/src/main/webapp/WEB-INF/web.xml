@@ -43,12 +43,11 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:context/application-context-service.xml
-<!-- 			classpath:context/application-context-security.xml -->
+			<!-- classpath:context/application-context-security.xml -->
 		</param-value>
 	</context-param>
 

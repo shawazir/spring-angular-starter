@@ -4,12 +4,11 @@
 		<encoder>
 			<pattern>
 				[%d{yyyy-MM-dd hh:mm:ss a}] [%-5p] [%t] [%logger{0}] %m%n
-				<!-- %-92([%d{yyyy-MM-dd hh:mm:ss a}] [%-5p] [%t] [%logger{0}]) %m%n -->
 			</pattern>
 		</encoder>
 	</appender>
 
-	<logger name="com.example" level="DEBUG" />
+	<logger name="sa.csmarc.example" level="DEBUG" />
 	<logger name="org.springframework" level="ERROR" />
 	<logger name="org.hibernate" level="ERROR" />
 

@@ -10,55 +10,5 @@
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<context:component-scan base-package="sa.csmarc.example.web.security" />
-	<http security="none" pattern="/resources/**" />
-	<http security="none" pattern="/captcha-controller/**" />
-	<http security="none" pattern="/home-page-content" />
-<!-- 	<http security="none" pattern="/applicant-appeal/**" /> -->
-	
 
-
-
-
-	<http use-expressions="true" entry-point-ref="customAuthenticationEntryPoint">
-<!-- 		<custom-filter ref="csrfTokenResponseHeaderBindingFilter" -->
-<!-- 			after="CSRF_FILTER" /> -->
-		<intercept-url pattern="/index**" access="permitAll" />
-		<intercept-url pattern="/index-dev.html" access="permitAll" />
-		<intercept-url pattern="/not-found.html" access="permitAll" />
-		<intercept-url pattern="/error.html" access="permitAll" />
-		<intercept-url pattern="/cache/refresh" access="permitAll" />
-		<intercept-url pattern="/cache/faqs" access="permitAll" />
-		<intercept-url pattern="/cache/faqs/categories" access="permitAll" />
-		<intercept-url pattern="/cache/static-pages" access="permitAll" />
-		<intercept-url pattern="/cache/static-pages/*" access="permitAll" />
-		<intercept-url pattern="/cache/news" access="permitAll" />
-		<intercept-url pattern="/cache/news/*" access="permitAll" />
-		<intercept-url pattern="/cache/banners" access="permitAll" />
-		<intercept-url pattern="/cache/text-sliders" access="permitAll" />
-		<intercept-url pattern="/login/**" access="permitAll" />
-		<intercept-url pattern="/applicant/register-applicant" access="permitAll" />
-		<intercept-url pattern="/applicant/reset-password" access="permitAll" />
-		<intercept-url pattern="/static-pages/*" access="permitAll" />
-		
-		<intercept-url pattern="/**" access="hasRole('APPLICANT')" />
-		<form-login />
-		<access-denied-handler error-page="/access-denied" />
-		<logout logout-success-url="/logout" />
-		<session-management session-fixation-protection="newSession"></session-management>
-	</http>
-
-	<global-method-security pre-post-annotations="enabled" />
-<!-- 	<beans:bean id="csrfTokenResponseHeaderBindingFilter" -->
-<!-- 		class="com.elm.ssp.registration.web.filter.CsrfTokenResponseHeaderBindingFilter" /> -->
-
-
-	<authentication-manager alias="authenticationManager">
-		<authentication-provider user-service-ref="applicantDetailsService">
-			<password-encoder base64="false" ref="shaPasswordEncoder" />
-		</authentication-provider>
-	</authentication-manager>
-
-
-	<!-- <beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" 
-		/> -->
 </beans:beans>

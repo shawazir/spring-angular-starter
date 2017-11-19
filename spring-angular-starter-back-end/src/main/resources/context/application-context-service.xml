@@ -9,11 +9,10 @@
 	http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<!-- 
-	Activates annotations and searches for annotated classes.
-	 -->
-	<context:component-scan base-package="com.example.service" />
+	<!-- Activates annotations and searches for annotated classes -->
+	<context:component-scan base-package="sa.csmarc.example.service" />
 
+	<!-- SHA Password Encoder Bean -->
 	<bean id="shaPasswordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
 		<constructor-arg value="512" />
 	</bean>

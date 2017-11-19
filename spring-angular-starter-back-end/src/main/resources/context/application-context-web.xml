@@ -17,7 +17,6 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-
 	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<!-- Uses HibernateAwareObjectMapper mapper instead of the default one -->
@@ -31,13 +30,8 @@
 
 	<context:component-scan base-package="sa.csmarc.example.web" />
 
-	<context:annotation-config/>
+	<context:annotation-config />
 
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<mvc:resources mapping="/index.html" location="/index.html" />
-	<mvc:resources mapping="/index-dev.html" location="/index-dev.html" />
-	<mvc:resources mapping="/not-found.html" location="/not-found.html" />
-	<mvc:resources mapping="/error.html" location="/error.html" />
 	<mvc:resources mapping="/*.*" location="/*.*" />
 
 </beans>
