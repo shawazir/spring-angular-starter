@@ -7,23 +7,23 @@ import 'rxjs/add/operator/map';
 import {environment} from '../environments/environment';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) { }
+	constructor(private httpClient: HttpClient) { }
 
-  serverResponse: string;
+	serverResponse: string;
 
-  ngOnInit(): void {
-    // Make the HTTP request:
-    this.httpClient.get(environment.API_ROOT_URL + '/cache/faqs').subscribe(data => {
-      // Read the result field from the JSON response.
-      this.serverResponse = data + '';
-    });
-  }
+	ngOnInit(): void {
+		// Make the HTTP request:
+		this.httpClient.get(environment.API_ROOT_URL + '/cache/faqs').subscribe(data => {
+			// Read the result field from the JSON response.
+			this.serverResponse = data + '';
+		});
+	}
 
-  // title = 'app';
+	// title = 'app';
 }

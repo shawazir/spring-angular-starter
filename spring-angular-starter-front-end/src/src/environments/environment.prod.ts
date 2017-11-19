@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  API_ROOT_URL: ''
+	production: true,
+	API_ROOT_URL: ''
 };
