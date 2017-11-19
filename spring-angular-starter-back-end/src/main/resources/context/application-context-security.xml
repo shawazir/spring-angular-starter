@@ -9,7 +9,7 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<context:component-scan base-package="com.elm.ssp.registration.web.security" />
+	<context:component-scan base-package="sa.csmarc.example.web.security" />
 	<http security="none" pattern="/resources/**" />
 	<http security="none" pattern="/captcha-controller/**" />
 	<http security="none" pattern="/home-page-content" />

@@ -1,4 +1,4 @@
-package sa.csmark.example.web.security;
+package sa.csmarc.example.web.security;
 
 import java.io.IOException;
 

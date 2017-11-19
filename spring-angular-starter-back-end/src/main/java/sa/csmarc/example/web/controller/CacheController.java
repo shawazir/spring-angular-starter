@@ -1,4 +1,4 @@
-package sa.csmark.example.web.controller;
+package sa.csmarc.example.web.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
